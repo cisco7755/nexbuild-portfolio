@@ -5,7 +5,14 @@ import ProjectCard from '../components/ProjectCard'
 import ProjectCardSkeleton from '../components/ProjectCardSkeleton'
 import CTASection from '../components/CTASection'
 
-const industries = ['All', 'Health', 'Fintech', 'Logistics', 'SaaS']
+const trustStats = [
+  { value: `${projects.length}`, label: 'Case Studies' },
+  { value: `${[...new Set(projects.map(p => p.industry))].length}`, label: 'Industries' },
+  { value: '6+', label: 'Years Delivering' },
+  { value: '98%', label: 'Client Retention' },
+]
+
+const industries = ['All', 'Health', 'Fintech', 'Logistics', 'SaaS', 'Social', 'E-commerce']
 const serviceTypes = ['All', 'Web Development', 'Mobile Apps', 'Backend Systems']
 
 export default function Projects() {
@@ -46,6 +53,21 @@ export default function Projects() {
               Every project here includes the actual problem, what we built, and the measurable
               outcome. No vague descriptions.
             </p>
+          </motion.div>
+
+          {/* Trust strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="flex flex-wrap gap-6 mb-12 p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800"
+          >
+            {trustStats.map(s => (
+              <div key={s.label} className="flex items-center gap-3">
+                <span className="font-heading font-black text-2xl text-indigo-600 dark:text-indigo-400">{s.value}</span>
+                <span className="text-sm text-slate-500 dark:text-slate-400 font-medium">{s.label}</span>
+              </div>
+            ))}
           </motion.div>
 
           {/* Filters */}

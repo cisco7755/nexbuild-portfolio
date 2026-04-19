@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ExternalLink, Clock, CheckCircle2, MessageCircle } from 'lucide-react'
 import { projects } from '../utils/data'
 import CTASection from '../components/CTASection'
 
@@ -10,7 +10,7 @@ export default function ProjectDetail() {
 
   if (!project) return <Navigate to="/projects" replace />
 
-  const { title, industry, category, overview, problem, solution, outcome, metrics, tech, color } =
+  const { title, industry, category, overview, problem, solution, outcome, metrics, tech, color, liveUrl, liveLabel, duration, deliverables } =
     project
 
   const currentIndex = projects.findIndex(p => p.id === id)
@@ -59,6 +59,18 @@ export default function ProjectDetail() {
                 </span>
               ))}
             </div>
+
+            {/* Live link — visible on mobile only; desktop shows it in sidebar */}
+            {liveUrl && (
+              <a
+                href={liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="lg:hidden inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition-colors mb-2"
+              >
+                {liveLabel || 'View Live'} <ExternalLink size={14} />
+              </a>
+            )}
           </motion.div>
         </div>
       </section>
@@ -116,31 +128,148 @@ export default function ProjectDetail() {
         </div>
       </section>
 
-      {/* Content */}
+      {/* Content + Scope sidebar */}
       <section className="section-padding">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="space-y-12">
-            {[
-              { label: 'Overview', content: overview },
-              { label: 'The Problem', content: problem },
-              { label: 'Our Solution', content: solution },
-              { label: 'The Outcome', content: outcome },
-            ].map((section, i) => (
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
+
+            {/* Main narrative */}
+            <div className="lg:col-span-2 space-y-12">
+              {[
+                { label: 'Overview', content: overview },
+                { label: 'The Problem', content: problem },
+                { label: 'Our Solution', content: solution },
+              ].map((section, i) => (
+                <motion.div
+                  key={section.label}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                >
+                  <h2 className="font-heading text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                    {section.label}
+                  </h2>
+                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
+                    {section.content}
+                  </p>
+                </motion.div>
+              ))}
+
+              {/* The Outcome */}
               <motion.div
-                key={section.label}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: 0.5 }}
               >
                 <h2 className="font-heading text-2xl font-bold text-slate-900 dark:text-white mb-4">
-                  {section.label}
+                  The Outcome
                 </h2>
-                <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
-                  {section.content}
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg mb-8">
+                  {outcome}
                 </p>
+
+                {/* Mid-page CTA */}
+                <div className="p-6 rounded-2xl bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center flex-shrink-0">
+                      <MessageCircle size={18} className="text-white" />
+                    </div>
+                    <div>
+                      <p className="font-heading font-bold text-slate-900 dark:text-white mb-1">
+                        Building something similar?
+                      </p>
+                      <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                        We bring the same structured approach — clear scope, real deliverables, measurable outcomes — to every engagement.
+                      </p>
+                      <Link
+                        to="/contact"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition-colors"
+                      >
+                        Start a conversation <ArrowRight size={14} />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
-            ))}
+            </div>
+
+            {/* Scope sidebar */}
+            <div className="lg:col-span-1">
+              <div className="sticky top-28 space-y-6">
+
+                {/* Engagement at a glance */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800"
+                >
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-5">
+                    Engagement at a glance
+                  </h3>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-xs text-slate-400 dark:text-slate-500 mb-1">Type</p>
+                      <p className="text-sm font-semibold text-slate-900 dark:text-white">{category}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-400 dark:text-slate-500 mb-1">Industry</p>
+                      <p className="text-sm font-semibold text-slate-900 dark:text-white">{industry}</p>
+                    </div>
+                    {duration && (
+                      <div>
+                        <p className="text-xs text-slate-400 dark:text-slate-500 mb-1">Duration</p>
+                        <p className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
+                          <Clock size={13} className="text-indigo-500" /> {duration}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+
+                {/* Deliverables */}
+                {deliverables?.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800"
+                  >
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-5">
+                      What we delivered
+                    </h3>
+                    <ul className="space-y-3">
+                      {deliverables.map(d => (
+                        <li key={d} className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
+                          <CheckCircle2 size={15} className="text-indigo-500 flex-shrink-0 mt-0.5" />
+                          {d}
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
+
+                {/* Live link in sidebar too */}
+                {liveUrl && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                  >
+                    <a
+                      href={liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 dark:border-indigo-500 text-sm font-semibold hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-600 dark:hover:text-white transition-all"
+                    >
+                      {liveLabel || 'View Live'} <ExternalLink size={14} />
+                    </a>
+                  </motion.div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
