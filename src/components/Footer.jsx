@@ -36,11 +36,28 @@ const footerLinks = [
 function NewsletterStrip() {
   const [email, setEmail] = useState('')
   const [done, setDone] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
     if (!email.includes('@')) return
-    setDone(true)
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Something went wrong')
+      setDone(true)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -51,23 +68,27 @@ function NewsletterStrip() {
           <p className="text-indigo-200 text-sm">Practical engineering & product writing. No spam, ever.</p>
         </div>
         {done ? (
-          <p className="text-white font-semibold text-sm">You're in — thanks!</p>
+          <p className="text-white font-semibold text-sm">You're in — check your inbox.</p>
         ) : (
-          <form onSubmit={handleSubmit} className="flex gap-2 w-full md:w-auto">
-            <input
-              type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              placeholder="your@email.com"
-              className="flex-1 md:w-64 px-4 py-2.5 rounded-xl text-sm bg-white/10 text-white placeholder-indigo-300 border border-white/20 focus:outline-none focus:border-white transition-colors"
-            />
-            <button
-              type="submit"
-              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white text-indigo-600 font-semibold text-sm hover:bg-indigo-50 transition-colors flex-shrink-0"
-            >
-              Subscribe <ArrowRight size={14} />
-            </button>
-          </form>
+          <div className="w-full md:w-auto">
+            <form onSubmit={handleSubmit} className="flex gap-2 w-full md:w-auto">
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="your@email.com"
+                className="flex-1 md:w-64 px-4 py-2.5 rounded-xl text-sm bg-white/10 text-white placeholder-indigo-300 border border-white/20 focus:outline-none focus:border-white transition-colors"
+              />
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white text-indigo-600 font-semibold text-sm hover:bg-indigo-50 transition-colors flex-shrink-0 disabled:opacity-60"
+              >
+                {loading ? 'Sending…' : <><span>Subscribe</span> <ArrowRight size={14} /></>}
+              </button>
+            </form>
+            {error && <p className="text-red-300 text-xs mt-1.5">{error}</p>}
+          </div>
         )}
       </div>
     </div>
@@ -93,22 +114,28 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-3">
               <a
-                href="#"
+                href={import.meta.env.VITE_GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="GitHub"
                 className="p-2 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <Github size={16} />
               </a>
               <a
-                href="#"
+                href={import.meta.env.VITE_LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 className="p-2 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <Linkedin size={16} />
               </a>
               <a
-                href="#"
-                aria-label="Twitter"
+                href={import.meta.env.VITE_TWITTER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter / X"
                 className="p-2 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <Twitter size={16} />

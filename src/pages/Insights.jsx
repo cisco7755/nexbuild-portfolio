@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Clock } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import CTASection from '../components/CTASection'
 
 const articles = [
@@ -117,9 +118,9 @@ export default function Insights() {
                 <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
                   {featured.excerpt}
                 </p>
-                <button className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:gap-3 transition-all">
+                <Link to={`/insights/${featured.slug}`} className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:gap-3 transition-all">
                   Read article <ArrowRight size={14} />
-                </button>
+                </Link>
               </div>
             </div>
           </motion.div>
@@ -131,37 +132,41 @@ export default function Insights() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {rest.map((article, i) => (
-              <motion.article
+              <motion.div
                 key={article.slug}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="group flex flex-col p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-indigo-200 dark:hover:border-indigo-800 transition-colors cursor-pointer"
               >
-                <div className={`h-32 rounded-xl bg-gradient-to-br ${article.color} mb-5 flex items-center justify-center`}>
-                  <span className="text-white/20 font-heading font-black text-5xl select-none">
-                    {String(i + 2).padStart(2, '0')}
+                <Link
+                  to={`/insights/${article.slug}`}
+                  className="group flex flex-col p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-indigo-200 dark:hover:border-indigo-800 transition-colors h-full"
+                >
+                  <div className={`h-32 rounded-xl bg-gradient-to-br ${article.color} mb-5 flex items-center justify-center`}>
+                    <span className="text-white/20 font-heading font-black text-5xl select-none">
+                      {String(i + 2).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${tagColors[article.tag]}`}>
+                      {article.tag}
+                    </span>
+                    <span className="flex items-center gap-1 text-xs text-slate-400">
+                      <Clock size={12} /> {article.readTime} read
+                    </span>
+                  </div>
+                  <h3 className="font-heading font-bold text-slate-900 dark:text-white mb-2 leading-snug group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                    {article.title}
+                  </h3>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed flex-1 mb-4">
+                    {article.excerpt}
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 group-hover:gap-2.5 transition-all">
+                    Read article <ArrowRight size={12} />
                   </span>
-                </div>
-                <div className="flex items-center gap-3 mb-3">
-                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${tagColors[article.tag]}`}>
-                    {article.tag}
-                  </span>
-                  <span className="flex items-center gap-1 text-xs text-slate-400">
-                    <Clock size={12} /> {article.readTime} read
-                  </span>
-                </div>
-                <h3 className="font-heading font-bold text-slate-900 dark:text-white mb-2 leading-snug group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                  {article.title}
-                </h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed flex-1 mb-4">
-                  {article.excerpt}
-                </p>
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 group-hover:gap-2.5 transition-all">
-                  Read article <ArrowRight size={12} />
-                </span>
-              </motion.article>
+                </Link>
+              </motion.div>
             ))}
           </div>
         </div>
