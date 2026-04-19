@@ -65,13 +65,13 @@ export default function About() {
             className="max-w-3xl mb-16"
           >
             <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
-              About Nexbuild
+              About NexaStack Technologies
             </span>
             <h1 className="font-heading text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 leading-tight">
               We build software companies depend on.
             </h1>
             <p className="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
-              Nexbuild is a Nigerian software development company with one focus: building products
+              NexaStack Technologies is a Nigerian software development company with one focus: building products
               that work under real-world conditions. Based in Lagos, we work with businesses across
               Africa and globally — not demos, not prototypes handed off with a prayer. Software that
               ships, scales, and earns trust over time.
@@ -253,7 +253,7 @@ export default function About() {
             className="mb-12 text-center"
           >
             <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
-              Why Nexbuild
+              Why NexaStack Technologies
             </span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
               Not all agencies are built the same.
@@ -271,7 +271,7 @@ export default function About() {
               <thead>
                 <tr>
                   <th className="text-left font-semibold text-slate-500 dark:text-slate-400 pb-4 pr-6 w-1/2">What you're evaluating</th>
-                  <th className="text-center font-semibold text-indigo-600 dark:text-indigo-400 pb-4 px-6">Nexbuild</th>
+                  <th className="text-center font-semibold text-indigo-600 dark:text-indigo-400 pb-4 px-6">NexaStack Technologies</th>
                   <th className="text-center font-semibold text-slate-400 dark:text-slate-500 pb-4 pl-6">Typical agency</th>
                 </tr>
               </thead>

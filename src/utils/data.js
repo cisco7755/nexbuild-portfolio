@@ -457,7 +457,7 @@ export const processSteps = [
 export const testimonials = [
   {
     quote:
-      "Nexbuild delivered exactly what they scoped — on time, under budget. The codebase they handed over was clean enough that our in-house team could maintain it from day one.",
+      "NexaStack Technologies delivered exactly what they scoped — on time, under budget. The codebase they handed over was clean enough that our in-house team could maintain it from day one.",
     name: 'Dr. Amara Osei',
     title: 'CTO, Regional Hospital Network',
     industry: 'Health',
@@ -466,7 +466,7 @@ export const testimonials = [
   },
   {
     quote:
-      "We'd worked with two agencies before Nexbuild. Both overpromised and underdelivered. These guys flagged a scope problem in week two that would have cost us three months if it had surfaced at launch.",
+      "We'd worked with two agencies before NexaStack Technologies. Both overpromised and underdelivered. These guys flagged a scope problem in week two that would have cost us three months if it had surfaced at launch.",
     name: 'Tunde Adeyemi',
     title: 'Founder, ClearPay',
     industry: 'Fintech',

@@ -40,7 +40,7 @@ export default function Navbar({ theme, toggle }) {
             <span className="text-white font-bold text-sm font-heading">N</span>
           </div>
           <span className="font-heading font-bold text-lg text-slate-900 dark:text-white tracking-tight">
-            Nexbuild
+            NexaStack Technologies
           </span>
         </Link>
 

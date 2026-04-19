@@ -55,7 +55,7 @@ const articles = [
       },
       {
         type: 'p',
-        text: "Every Nexbuild engagement starts with a structured discovery sprint before any code is written. We spend the first one to two weeks doing three things: mapping the current workflow end to end, identifying the exact constraint that limits business performance, and writing one sentence that describes what we're building and why it will move the constraint.",
+        text: "Every NexaStack Technologies engagement starts with a structured discovery sprint before any code is written. We spend the first one to two weeks doing three things: mapping the current workflow end to end, identifying the exact constraint that limits business performance, and writing one sentence that describes what we're building and why it will move the constraint.",
       },
       {
         type: 'p',
@@ -182,7 +182,7 @@ const articles = [
       },
       {
         type: 'p',
-        text: "At Nexbuild, the engineers on your project are the engineers in your discovery sessions. There is no delivery team waiting behind a wall. We keep engagements to a size where this is sustainable — which means we turn down projects when we're at capacity rather than staffing them with people who don't have context.",
+        text: "At NexaStack Technologies, the engineers on your project are the engineers in your discovery sessions. There is no delivery team waiting behind a wall. We keep engagements to a size where this is sustainable — which means we turn down projects when we're at capacity rather than staffing them with people who don't have context.",
       },
     ],
   },
@@ -483,8 +483,8 @@ export default function InsightDetail() {
               <span className="text-white font-bold text-sm font-heading">N</span>
             </div>
             <div>
-              <p className="font-semibold text-slate-900 dark:text-white text-sm">Nexbuild Engineering</p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">Lagos, Nigeria · hello@nexbuild.io</p>
+              <p className="font-semibold text-slate-900 dark:text-white text-sm">NexaStack Technologies Engineering</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Lagos, Nigeria · hello@NexaStack Technologies.io</p>
             </div>
           </div>
 

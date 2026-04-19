@@ -324,7 +324,7 @@ export default function Home() {
               A team that ships — and keeps shipping.
             </h2>
             <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
-              Nexbuild is a software development company focused on building products that work under
+              NexaStack Technologies is a software development company focused on building products that work under
               real-world conditions. We don't prototype and hand off. We build, deploy, and stand
               behind the systems we ship.
             </p>
@@ -336,7 +336,7 @@ export default function Home() {
               to="/about"
               className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:gap-3 transition-all"
             >
-              Learn more about Nexbuild <ArrowRight size={14} />
+              Learn more about NexaStack Technologies <ArrowRight size={14} />
             </Link>
           </motion.div>
 

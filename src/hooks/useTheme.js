@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 export function useTheme() {
   const [theme, setTheme] = useState(() => {
     if (typeof window === 'undefined') return 'dark'
-    const stored = localStorage.getItem('nexbuild-theme')
+    const stored = localStorage.getItem('NexaStack Technologies-theme')
     if (stored) return stored
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   })
@@ -15,7 +15,7 @@ export function useTheme() {
     } else {
       root.classList.remove('dark')
     }
-    localStorage.setItem('nexbuild-theme', theme)
+    localStorage.setItem('NexaStack Technologies-theme', theme)
   }, [theme])
 
   const toggle = () => setTheme(t => (t === 'dark' ? 'light' : 'dark'))

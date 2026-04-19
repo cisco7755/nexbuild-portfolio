@@ -107,7 +107,7 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center flex-shrink-0">
                 <span className="text-white font-bold text-sm font-heading">N</span>
               </div>
-              <span className="font-heading font-bold text-lg text-slate-900 dark:text-white">Nexbuild</span>
+              <span className="font-heading font-bold text-lg text-slate-900 dark:text-white">NexaStack Technologies</span>
             </Link>
             <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
               We design and build software that helps businesses launch faster and scale without friction.
@@ -166,7 +166,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-slate-400 dark:text-slate-500">
-            &copy; {new Date().getFullYear()} Nexbuild. All rights reserved.
+            &copy; {new Date().getFullYear()} NexaStack Technologies. All rights reserved.
           </p>
           <p className="text-sm text-slate-400 dark:text-slate-500">
             {import.meta.env.VITE_COMPANY_LOCATION} · {import.meta.env.VITE_CONTACT_EMAIL}
