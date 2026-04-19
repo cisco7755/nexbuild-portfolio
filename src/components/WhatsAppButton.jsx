@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 
-const WHATSAPP_NUMBER = '2349036101623'
-const WHATSAPP_MESSAGE = "Hi Nexbuild, I'd like to discuss a project."
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER
+const WHATSAPP_MESSAGE = import.meta.env.VITE_WHATSAPP_MESSAGE
 
 export default function WhatsAppButton() {
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`

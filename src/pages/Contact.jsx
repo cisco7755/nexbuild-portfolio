@@ -91,13 +91,13 @@ export default function Contact() {
                   {
                     icon: Mail,
                     label: 'Email',
-                    value: 'hello@nexbuild.io',
+                    value: import.meta.env.VITE_CONTACT_EMAIL,
                     sub: 'We respond within 1 business day',
                   },
                   {
                     icon: MapPin,
                     label: 'Location',
-                    value: 'Lagos, Nigeria',
+                    value: import.meta.env.VITE_COMPANY_LOCATION,
                     sub: 'Serving clients across Africa & globally',
                   },
                   {
