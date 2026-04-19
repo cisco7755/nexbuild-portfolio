@@ -1,5 +1,150 @@
 export const projects = [
   {
+    id: 'whistler-mobile',
+    title: 'Whistler — Social Community App',
+    category: 'Mobile App',
+    industry: 'Social',
+    service: 'Mobile Apps',
+    shortDescription:
+      'Cross-platform social community app for iOS and Android, enabling users to create communities, share moments, attend events, and message in real time.',
+    overview:
+      'Whistler is a full-featured social community platform built as a React Native application for iOS and Android. The app allows users to discover and join communities by interest, share moments, co-create events, connect with people, and communicate through real-time direct and group messaging — all in a single, cohesive experience.',
+    problem:
+      "Existing social platforms fragment community interaction across multiple apps — one for messaging, one for event planning, one for content sharing. Users in niche communities struggled to find purpose-built spaces that combined discovery, communication, and event coordination without noise from irrelevant content and algorithmic feeds.",
+    solution:
+      "We built a React Native application from the ground up with a structured community model at its core. Each community has its own discussion board, member directory, event calendar, and moments feed. Real-time messaging is powered by Firebase, with support for direct messages, group chats, emoji reactions, and media sharing. Push notifications via Firebase Cloud Messaging keep members engaged across iOS and Android. Google and Apple sign-in reduce onboarding friction. An interest-selection flow on first launch means the feed is immediately relevant — no cold-start problem.",
+    outcome:
+      "Whistler launched on both the App Store and Google Play with a full suite of social features typically split across multiple apps. The interest-driven onboarding and community-first architecture produced a feed relevance rate that drove measurably higher session depth compared to category benchmarks. The app is live and actively growing its community base.",
+    metrics: [
+      { label: 'Platforms shipped', value: 'iOS + Android' },
+      { label: 'Core feature modules', value: '12+' },
+      { label: 'Auth providers', value: 'Google · Apple · Email' },
+    ],
+    tech: ['React Native', 'TypeScript', 'Firebase', 'Node.js', 'PostgreSQL', 'Redux'],
+    color: 'from-sky-500 to-indigo-600',
+    featured: true,
+    duration: '28 weeks',
+    deliverables: ['React Native app (iOS + Android)', 'Firebase real-time messaging', 'Community and events system', 'Moments content feed', 'Google & Apple SSO', 'Push notification system'],
+    liveUrl: import.meta.env.VITE_WHISTLER_PLAYSTORE_URL,
+    liveLabel: 'View on Play Store',
+  },
+  {
+    id: 'whistler-admin',
+    title: 'Whistler — Admin Dashboard',
+    category: 'Web App',
+    industry: 'Social',
+    service: 'Web Development',
+    shortDescription:
+      'Operations and moderation dashboard for the Whistler platform — giving the team full visibility into communities, users, moments, and activity in real time.',
+    overview:
+      'The Whistler Admin Dashboard is a React/TypeScript web application that serves as the internal control plane for the entire Whistler social platform. It gives the operations and trust-and-safety team real-time visibility into platform activity and the tools to act on it — community management, user moderation, moment review, and activity analytics — all from a single, well-structured interface.',
+    problem:
+      "As Whistler grew, manually managing community health, reviewing reported content, and keeping track of user behaviour across thousands of interactions became unworkable. The team needed structured tooling to stay ahead of moderation queues, identify bad actors quickly, and have reliable data on how the platform was actually being used.",
+    solution:
+      "We built a multi-section admin dashboard using React, TypeScript, TanStack Query, and TanStack Table. The Dashboard gives an at-a-glance view of platform-wide KPIs — daily active users, new community registrations, moment submissions, and flagged content counts. The Communities module lets admins browse, inspect, and act on any community, including editing metadata and removing violating content. The Users module supports search, filtering, and account-level actions including suspension and role assignment. The Moments and Moderation sections provide queued review workflows so the team processes reports in priority order rather than hunting for them. Activity logs maintain a tamper-evident audit trail of every admin action for accountability.",
+    outcome:
+      "Moderation response time dropped from hours to under 15 minutes for high-priority reports. The ops team now manages the platform's full user and community lifecycle through a single tool instead of direct database queries and ad-hoc scripts. Onboarding new trust-and-safety staff went from days of training to a few hours.",
+    metrics: [
+      { label: 'Moderation response time', value: '<15 min' },
+      { label: 'Admin modules', value: '7 core areas' },
+      { label: 'Audit trail coverage', value: '100%' },
+    ],
+    tech: ['React', 'TypeScript', 'TanStack Query', 'TanStack Table', 'Tailwind CSS', 'Vite'],
+    color: 'from-violet-500 to-indigo-600',
+    featured: false,
+    duration: '10 weeks',
+    deliverables: ['React/TypeScript admin SPA', 'Community moderation queue', 'User management and suspension tools', 'Moments review workflow', 'Activity audit log'],
+    liveUrl: import.meta.env.VITE_WHISTLER_ADMIN_URL,
+    liveLabel: 'View Admin Demo',
+  },
+  {
+    id: 'beta-buy',
+    title: 'BetaBuy — Multi-Vendor Marketplace',
+    category: 'Web App',
+    industry: 'E-commerce',
+    service: 'Web Development',
+    shortDescription:
+      'Full-stack multi-vendor marketplace with buyer, seller, and admin portals — supporting product listings, flash sales, checkout, KYC, payouts, and dispute resolution.',
+    overview:
+      'BetaBuy is a production-ready multi-vendor e-commerce marketplace built with React, TypeScript, and a robust REST API backend. The platform supports three distinct user roles — buyers, sellers, and administrators — each with a dedicated portal and workflow. Buyers shop across categories, track deals and flash sales, manage wishlists, and set price alerts. Sellers onboard through a KYC process, manage product catalogues, fulfill orders, and withdraw earnings to their wallet. Admins oversee the entire marketplace: products, users, sellers, orders, payouts, and dispute resolution.',
+    problem:
+      "Building a marketplace that serves three fundamentally different user types — each with distinct needs, permissions, and workflows — without the product fragmenting into an unusable mess is a hard design and engineering problem. Most off-the-shelf solutions force compromises that hurt the seller experience (overly simplified product management) or the admin experience (no real dispute tools). The client needed a platform they owned end-to-end, with no vendor lock-in.",
+    solution:
+      "We built BetaBuy as a single React/TypeScript application with role-based routing and conditional UI rendering — one codebase, three coherent experiences. The buyer portal includes a homepage with featured products and flash sales, category browsing, full-text search, product detail pages with review surfaces, a cart and multi-step checkout flow, order tracking, wishlists, price alerts, and a referral system. The seller portal provides a guided KYC onboarding flow, a product management interface with bulk actions, an orders fulfillment view, payout history, and a wallet for managing earnings. The admin portal consolidates user management, seller verification, product moderation, order oversight, dispute adjudication, and payout approvals in a single dashboard with data tables and audit trails. Zustand handles shared state, TanStack Query manages server state with caching, and Zod enforces schema validation at every form boundary.",
+    outcome:
+      "BetaBuy shipped with all three portals fully functional in a single deployment. The seller KYC flow reduced onboarding time from manual email back-and-forth to a self-service process completed in under 10 minutes. The dispute resolution module gives admins a structured workflow that replaced an untracked email chain. The platform is built and deployed on Vercel with environment-driven configuration for zero-downtime updates.",
+    metrics: [
+      { label: 'User roles supported', value: '3 portals' },
+      { label: 'Seller KYC onboarding', value: '<10 min' },
+      { label: 'Feature modules', value: '20+ pages' },
+    ],
+    tech: ['React', 'TypeScript', 'Zustand', 'TanStack Query', 'React Hook Form', 'Zod', 'Tailwind CSS', 'Vite'],
+    color: 'from-amber-500 to-orange-600',
+    featured: true,
+    duration: '22 weeks',
+    deliverables: ['Buyer shopping portal', 'Seller dashboard with KYC onboarding', 'Admin control panel', 'Flash sales and deals engine', 'Dispute resolution workflow', 'Seller wallet and payout system'],
+    liveUrl: import.meta.env.VITE_BETABUY_URL,
+    liveLabel: 'View Live Site',
+  },
+  {
+    id: 'clientshot',
+    title: 'Clientshot — Customer Feedback Platform',
+    category: 'Web App',
+    industry: 'Health',
+    service: 'Web Development',
+    shortDescription:
+      'Enterprise-grade customer feedback and business intelligence platform for healthcare organisations, enabling real-time survey collection, analytics, and multi-channel communication across web, email, SMS, and WhatsApp.',
+    overview:
+      'Clientshot is a production-ready customer feedback and business intelligence platform built for healthcare providers, hospitals, and service organisations. The Angular 18 web application gives teams the tools to design custom feedback forms, deploy them across multiple channels simultaneously, collect responses in real time, and turn raw feedback into actionable analytics — all from a single, role-aware dashboard. The platform is live at clientshot.com and serves enterprise clients across the healthcare sector.',
+    problem:
+      "Healthcare organisations collect patient and client feedback through disconnected channels — paper forms, email surveys, SMS, and WhatsApp — with no unified view of responses and no way to act on trends as they emerge. Feedback data sits in silos, reporting is manual, and the gap between what patients experience and what management sees can stretch to weeks. Service quality issues that should surface immediately instead compound silently.",
+    solution:
+      "We built a comprehensive feedback platform on Angular 18 with a microservices backend (Java/Spring Boot for core logic, NestJS for real-time messaging, PostgreSQL for storage, Redis for caching) hosted on AWS. The form builder supports branching logic, multiple question types (scale, preference, multi-point, open text), and reusable form templates. Completed forms are deployed to web, email (via Mailgun), SMS, and WhatsApp Business API in one action. Responses stream into dashboards in real time using Socket.IO. The analytics layer surfaces ratings by department, service point, and branch — with drill-down into individual responses and commendation or complaint tagging. Role-based access ensures department managers see only their data, while organisation administrators have full cross-branch visibility. Billing is integrated with Paystack for subscription management.",
+    outcome:
+      "Clientshot is live at clientshot.com and actively used by healthcare clients managing multi-branch operations. Organisations report closing the feedback loop with patients in near real time rather than reviewing weekly batch reports. The multi-channel deployment model increased survey completion rates by eliminating the friction of channel switching. The platform's modular architecture allowed the team to ship new question types and channel integrations without disrupting existing client workflows.",
+    metrics: [
+      { label: 'Feedback channels supported', value: '4 (Web · Email · SMS · WhatsApp)' },
+      { label: 'Architecture', value: 'Microservices on AWS' },
+      { label: 'Status', value: 'Live — clientshot.com' },
+    ],
+    tech: ['Angular 18', 'TypeScript', 'Java', 'Spring Boot', 'NestJS', 'PostgreSQL', 'Redis', 'Socket.IO', 'AWS', 'Paystack'],
+    color: 'from-teal-500 to-emerald-600',
+    featured: true,
+    duration: '32 weeks',
+    deliverables: ['Angular 18 SPA with drag-and-drop form builder', 'Multi-channel deployment (Web, Email, SMS, WhatsApp)', 'Real-time analytics dashboard', 'Microservices backend (Java + NestJS)', 'Role-based access control', 'Paystack billing integration'],
+    liveUrl: import.meta.env.VITE_CLIENTSHOT_URL,
+    liveLabel: 'View Live Site',
+  },
+  {
+    id: 'clientshot-admin',
+    title: 'Clientshot — Operations Admin',
+    category: 'Web App',
+    industry: 'Health',
+    service: 'Web Development',
+    shortDescription:
+      'Internal operations dashboard for the Clientshot platform — giving the SeamHealth team full control over company accounts, facilities, branches, and platform-wide activity.',
+    overview:
+      'The Clientshot Admin Panel is an Angular 18 web application that serves as the internal control plane for the entire Clientshot platform. It gives the SeamHealth operations team centralised visibility into every company account, facility, and branch onboarded to the platform — with the tooling to manage account lifecycles, review activity logs, and monitor platform-wide health from a single, secure interface.',
+    problem:
+      "As the Clientshot platform grew and onboarded multiple enterprise clients, managing accounts, verifying facilities, and resolving issues through direct database access and ad-hoc scripts became untenable. The operations team needed a purpose-built interface that mapped to the actual lifecycle of a Clientshot account — from initial onboarding and facility setup through to ongoing monitoring and support — without requiring engineering involvement for routine operations tasks.",
+    solution:
+      "We built a dedicated admin Angular application with a clean separation of concerns across four core areas. The Overview module gives an at-a-glance summary of platform activity — active accounts, recently onboarded facilities, and flagged items requiring action. The Accounts module provides searchable, filterable account lists with drill-down into individual account detail, subscription status, and branch structure. The Facilities module lets admins view, verify, and manage healthcare facilities linked to each account. The Branch View allows the team to inspect individual branches — their configured service points, departments, and form deployments. A full Activity Log maintains a timestamped audit trail of every admin action taken within the panel, ensuring accountability and supporting compliance requirements.",
+    outcome:
+      "The operations team went from relying on engineering to run database queries for account changes to self-serving 95% of account management tasks through the admin panel. Onboarding a new enterprise client — from account creation to facility configuration — was reduced from a multi-day coordination process to a same-day operation. The audit log eliminated ambiguity in support escalations by providing a clear chain of actions for every account.",
+    metrics: [
+      { label: 'Account tasks self-served', value: '95%' },
+      { label: 'Client onboarding time', value: 'Same-day' },
+      { label: 'Admin modules', value: '4 core areas' },
+    ],
+    tech: ['Angular 18', 'TypeScript', 'RxJS', 'Angular CDK', 'Chart.js', 'SCSS'],
+    color: 'from-indigo-500 to-blue-600',
+    featured: false,
+    duration: '8 weeks',
+    deliverables: ['Angular 18 admin SPA', 'Account and facility management', 'Branch configuration tools', 'Activity audit log', 'Client onboarding workflow'],
+    liveUrl: import.meta.env.VITE_CLIENTSHOT_ADMIN_URL,
+    liveLabel: 'View Admin Demo',
+  },
+  {
     id: 'healthtrack-pro',
     title: 'HealthTrack Pro',
     category: 'Mobile App',
@@ -160,151 +305,6 @@ export const projects = [
     featured: false,
     duration: '18 weeks',
     deliverables: ['FastAPI + ClickHouse ingestion pipeline', 'Real-time P&L and risk dashboard', 'Backtest engine (40x speed)', 'Live market data feed integration', 'Portfolio attribution reporting'],
-  },
-  {
-    id: 'whistler-mobile',
-    title: 'Whistler — Social Community App',
-    category: 'Mobile App',
-    industry: 'Social',
-    service: 'Mobile Apps',
-    shortDescription:
-      'Cross-platform social community app for iOS and Android, enabling users to create communities, share moments, attend events, and message in real time.',
-    overview:
-      'Whistler is a full-featured social community platform built as a React Native application for iOS and Android. The app allows users to discover and join communities by interest, share moments, co-create events, connect with people, and communicate through real-time direct and group messaging — all in a single, cohesive experience.',
-    problem:
-      "Existing social platforms fragment community interaction across multiple apps — one for messaging, one for event planning, one for content sharing. Users in niche communities struggled to find purpose-built spaces that combined discovery, communication, and event coordination without noise from irrelevant content and algorithmic feeds.",
-    solution:
-      "We built a React Native application from the ground up with a structured community model at its core. Each community has its own discussion board, member directory, event calendar, and moments feed. Real-time messaging is powered by Firebase, with support for direct messages, group chats, emoji reactions, and media sharing. Push notifications via Firebase Cloud Messaging keep members engaged across iOS and Android. Google and Apple sign-in reduce onboarding friction. An interest-selection flow on first launch means the feed is immediately relevant — no cold-start problem.",
-    outcome:
-      "Whistler launched on both the App Store and Google Play with a full suite of social features typically split across multiple apps. The interest-driven onboarding and community-first architecture produced a feed relevance rate that drove measurably higher session depth compared to category benchmarks. The app is live and actively growing its community base.",
-    metrics: [
-      { label: 'Platforms shipped', value: 'iOS + Android' },
-      { label: 'Core feature modules', value: '12+' },
-      { label: 'Auth providers', value: 'Google · Apple · Email' },
-    ],
-    tech: ['React Native', 'TypeScript', 'Firebase', 'Node.js', 'PostgreSQL', 'Redux'],
-    color: 'from-sky-500 to-indigo-600',
-    featured: true,
-    duration: '28 weeks',
-    deliverables: ['React Native app (iOS + Android)', 'Firebase real-time messaging', 'Community and events system', 'Moments content feed', 'Google & Apple SSO', 'Push notification system'],
-    liveUrl: import.meta.env.VITE_WHISTLER_PLAYSTORE_URL,
-    liveLabel: 'View on Play Store',
-  },
-  {
-    id: 'whistler-admin',
-    title: 'Whistler — Admin Dashboard',
-    category: 'Web App',
-    industry: 'Social',
-    service: 'Web Development',
-    shortDescription:
-      'Operations and moderation dashboard for the Whistler platform — giving the team full visibility into communities, users, moments, and activity in real time.',
-    overview:
-      'The Whistler Admin Dashboard is a React/TypeScript web application that serves as the internal control plane for the entire Whistler social platform. It gives the operations and trust-and-safety team real-time visibility into platform activity and the tools to act on it — community management, user moderation, moment review, and activity analytics — all from a single, well-structured interface.',
-    problem:
-      "As Whistler grew, manually managing community health, reviewing reported content, and keeping track of user behaviour across thousands of interactions became unworkable. The team needed structured tooling to stay ahead of moderation queues, identify bad actors quickly, and have reliable data on how the platform was actually being used.",
-    solution:
-      "We built a multi-section admin dashboard using React, TypeScript, TanStack Query, and TanStack Table. The Dashboard gives an at-a-glance view of platform-wide KPIs — daily active users, new community registrations, moment submissions, and flagged content counts. The Communities module lets admins browse, inspect, and act on any community, including editing metadata and removing violating content. The Users module supports search, filtering, and account-level actions including suspension and role assignment. The Moments and Moderation sections provide queued review workflows so the team processes reports in priority order rather than hunting for them. Activity logs maintain a tamper-evident audit trail of every admin action for accountability.",
-    outcome:
-      "Moderation response time dropped from hours to under 15 minutes for high-priority reports. The ops team now manages the platform's full user and community lifecycle through a single tool instead of direct database queries and ad-hoc scripts. Onboarding new trust-and-safety staff went from days of training to a few hours.",
-    metrics: [
-      { label: 'Moderation response time', value: '<15 min' },
-      { label: 'Admin modules', value: '7 core areas' },
-      { label: 'Audit trail coverage', value: '100%' },
-    ],
-    tech: ['React', 'TypeScript', 'TanStack Query', 'TanStack Table', 'Tailwind CSS', 'Vite'],
-    color: 'from-violet-500 to-indigo-600',
-    featured: false,
-    duration: '10 weeks',
-    deliverables: ['React/TypeScript admin SPA', 'Community moderation queue', 'User management and suspension tools', 'Moments review workflow', 'Activity audit log'],
-    liveUrl: import.meta.env.VITE_WHISTLER_ADMIN_URL,
-    liveLabel: 'View Admin Demo',
-  },
-  {
-    id: 'beta-buy',
-    title: 'BetaBuy — Multi-Vendor Marketplace',
-    category: 'Web App',
-    industry: 'E-commerce',
-    service: 'Web Development',
-    shortDescription:
-      'Full-stack multi-vendor marketplace with buyer, seller, and admin portals — supporting product listings, flash sales, checkout, KYC, payouts, and dispute resolution.',
-    overview:
-      'BetaBuy is a production-ready multi-vendor e-commerce marketplace built with React, TypeScript, and a robust REST API backend. The platform supports three distinct user roles — buyers, sellers, and administrators — each with a dedicated portal and workflow. Buyers shop across categories, track deals and flash sales, manage wishlists, and set price alerts. Sellers onboard through a KYC process, manage product catalogues, fulfill orders, and withdraw earnings to their wallet. Admins oversee the entire marketplace: products, users, sellers, orders, payouts, and dispute resolution.',
-    problem:
-      "Building a marketplace that serves three fundamentally different user types — each with distinct needs, permissions, and workflows — without the product fragmenting into an unusable mess is a hard design and engineering problem. Most off-the-shelf solutions force compromises that hurt the seller experience (overly simplified product management) or the admin experience (no real dispute tools). The client needed a platform they owned end-to-end, with no vendor lock-in.",
-    solution:
-      "We built BetaBuy as a single React/TypeScript application with role-based routing and conditional UI rendering — one codebase, three coherent experiences. The buyer portal includes a homepage with featured products and flash sales, category browsing, full-text search, product detail pages with review surfaces, a cart and multi-step checkout flow, order tracking, wishlists, price alerts, and a referral system. The seller portal provides a guided KYC onboarding flow, a product management interface with bulk actions, an orders fulfillment view, payout history, and a wallet for managing earnings. The admin portal consolidates user management, seller verification, product moderation, order oversight, dispute adjudication, and payout approvals in a single dashboard with data tables and audit trails. Zustand handles shared state, TanStack Query manages server state with caching, and Zod enforces schema validation at every form boundary.",
-    outcome:
-      "BetaBuy shipped with all three portals fully functional in a single deployment. The seller KYC flow reduced onboarding time from manual email back-and-forth to a self-service process completed in under 10 minutes. The dispute resolution module gives admins a structured workflow that replaced an untracked email chain. The platform is built and deployed on Vercel with environment-driven configuration for zero-downtime updates.",
-    metrics: [
-      { label: 'User roles supported', value: '3 portals' },
-      { label: 'Seller KYC onboarding', value: '<10 min' },
-      { label: 'Feature modules', value: '20+ pages' },
-    ],
-    tech: ['React', 'TypeScript', 'Zustand', 'TanStack Query', 'React Hook Form', 'Zod', 'Tailwind CSS', 'Vite'],
-    color: 'from-amber-500 to-orange-600',
-    featured: true,
-    duration: '22 weeks',
-    deliverables: ['Buyer shopping portal', 'Seller dashboard with KYC onboarding', 'Admin control panel', 'Flash sales and deals engine', 'Dispute resolution workflow', 'Seller wallet and payout system'],
-    liveUrl: import.meta.env.VITE_BETABUY_URL,
-    liveLabel: 'View Live Site',
-  },
-  {
-    id: 'clientshot',
-    title: 'Clientshot — Customer Feedback Platform',
-    category: 'Web App',
-    industry: 'Health',
-    service: 'Web Development',
-    shortDescription:
-      'Enterprise-grade customer feedback and business intelligence platform for healthcare organisations, enabling real-time survey collection, analytics, and multi-channel communication across web, email, SMS, and WhatsApp.',
-    overview:
-      'Clientshot is a production-ready customer feedback and business intelligence platform built for healthcare providers, hospitals, and service organisations. The Angular 18 web application gives teams the tools to design custom feedback forms, deploy them across multiple channels simultaneously, collect responses in real time, and turn raw feedback into actionable analytics — all from a single, role-aware dashboard. The platform is live at clientshot.com and serves enterprise clients across the healthcare sector.',
-    problem:
-      "Healthcare organisations collect patient and client feedback through disconnected channels — paper forms, email surveys, SMS, and WhatsApp — with no unified view of responses and no way to act on trends as they emerge. Feedback data sits in silos, reporting is manual, and the gap between what patients experience and what management sees can stretch to weeks. Service quality issues that should surface immediately instead compound silently.",
-    solution:
-      "We built a comprehensive feedback platform on Angular 18 with a microservices backend (Java/Spring Boot for core logic, NestJS for real-time messaging, PostgreSQL for storage, Redis for caching) hosted on AWS. The form builder supports branching logic, multiple question types (scale, preference, multi-point, open text), and reusable form templates. Completed forms are deployed to web, email (via Mailgun), SMS, and WhatsApp Business API in one action. Responses stream into dashboards in real time using Socket.IO. The analytics layer surfaces ratings by department, service point, and branch — with drill-down into individual responses and commendation or complaint tagging. Role-based access ensures department managers see only their data, while organisation administrators have full cross-branch visibility. Billing is integrated with Paystack for subscription management.",
-    outcome:
-      "Clientshot is live at clientshot.com and actively used by healthcare clients managing multi-branch operations. Organisations report closing the feedback loop with patients in near real time rather than reviewing weekly batch reports. The multi-channel deployment model increased survey completion rates by eliminating the friction of channel switching. The platform's modular architecture allowed the team to ship new question types and channel integrations without disrupting existing client workflows.",
-    metrics: [
-      { label: 'Feedback channels supported', value: '4 (Web · Email · SMS · WhatsApp)' },
-      { label: 'Architecture', value: 'Microservices on AWS' },
-      { label: 'Status', value: 'Live — clientshot.com' },
-    ],
-    tech: ['Angular 18', 'TypeScript', 'Java', 'Spring Boot', 'NestJS', 'PostgreSQL', 'Redis', 'Socket.IO', 'AWS', 'Paystack'],
-    color: 'from-teal-500 to-emerald-600',
-    featured: true,
-    duration: '32 weeks',
-    deliverables: ['Angular 18 SPA with drag-and-drop form builder', 'Multi-channel deployment (Web, Email, SMS, WhatsApp)', 'Real-time analytics dashboard', 'Microservices backend (Java + NestJS)', 'Role-based access control', 'Paystack billing integration'],
-    liveUrl: import.meta.env.VITE_CLIENTSHOT_URL,
-    liveLabel: 'View Live Site',
-  },
-  {
-    id: 'clientshot-admin',
-    title: 'Clientshot — Operations Admin',
-    category: 'Web App',
-    industry: 'Health',
-    service: 'Web Development',
-    shortDescription:
-      'Internal operations dashboard for the Clientshot platform — giving the SeamHealth team full control over company accounts, facilities, branches, and platform-wide activity.',
-    overview:
-      'The Clientshot Admin Panel is an Angular 18 web application that serves as the internal control plane for the entire Clientshot platform. It gives the SeamHealth operations team centralised visibility into every company account, facility, and branch onboarded to the platform — with the tooling to manage account lifecycles, review activity logs, and monitor platform-wide health from a single, secure interface.',
-    problem:
-      "As the Clientshot platform grew and onboarded multiple enterprise clients, managing accounts, verifying facilities, and resolving issues through direct database access and ad-hoc scripts became untenable. The operations team needed a purpose-built interface that mapped to the actual lifecycle of a Clientshot account — from initial onboarding and facility setup through to ongoing monitoring and support — without requiring engineering involvement for routine operations tasks.",
-    solution:
-      "We built a dedicated admin Angular application with a clean separation of concerns across four core areas. The Overview module gives an at-a-glance summary of platform activity — active accounts, recently onboarded facilities, and flagged items requiring action. The Accounts module provides searchable, filterable account lists with drill-down into individual account detail, subscription status, and branch structure. The Facilities module lets admins view, verify, and manage healthcare facilities linked to each account. The Branch View allows the team to inspect individual branches — their configured service points, departments, and form deployments. A full Activity Log maintains a timestamped audit trail of every admin action taken within the panel, ensuring accountability and supporting compliance requirements.",
-    outcome:
-      "The operations team went from relying on engineering to run database queries for account changes to self-serving 95% of account management tasks through the admin panel. Onboarding a new enterprise client — from account creation to facility configuration — was reduced from a multi-day coordination process to a same-day operation. The audit log eliminated ambiguity in support escalations by providing a clear chain of actions for every account.",
-    metrics: [
-      { label: 'Account tasks self-served', value: '95%' },
-      { label: 'Client onboarding time', value: 'Same-day' },
-      { label: 'Admin modules', value: '4 core areas' },
-    ],
-    tech: ['Angular 18', 'TypeScript', 'RxJS', 'Angular CDK', 'Chart.js', 'SCSS'],
-    color: 'from-indigo-500 to-blue-600',
-    featured: false,
-    duration: '8 weeks',
-    deliverables: ['Angular 18 admin SPA', 'Account and facility management', 'Branch configuration tools', 'Activity audit log', 'Client onboarding workflow'],
-    liveUrl: import.meta.env.VITE_CLIENTSHOT_ADMIN_URL,
-    liveLabel: 'View Admin Demo',
   },
 ]
 
