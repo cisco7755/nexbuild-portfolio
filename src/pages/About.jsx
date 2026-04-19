@@ -70,9 +70,10 @@ export default function About() {
               We build software companies depend on.
             </h1>
             <p className="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
-              Nexbuild is a software development company with one focus: building products that work
-              under real-world conditions. Not demos. Not prototypes handed off with a prayer. Software
-              that ships, scales, and earns trust over time.
+              Nexbuild is a Nigerian software development company with one focus: building products
+              that work under real-world conditions. Based in Lagos, we work with businesses across
+              Africa and globally — not demos, not prototypes handed off with a prayer. Software that
+              ships, scales, and earns trust over time.
             </p>
           </motion.div>
 

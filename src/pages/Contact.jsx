@@ -97,8 +97,8 @@ export default function Contact() {
                   {
                     icon: MapPin,
                     label: 'Location',
-                    value: 'Remote-first',
-                    sub: 'Clients across North America & Europe',
+                    value: 'Lagos, Nigeria',
+                    sub: 'Serving clients across Africa & globally',
                   },
                   {
                     icon: Clock,

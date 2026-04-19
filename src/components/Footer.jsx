@@ -97,7 +97,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Nexbuild. All rights reserved.
           </p>
           <p className="text-sm text-slate-400 dark:text-slate-500">
-            hello@nexbuild.io
+            Lagos, Nigeria · hello@nexbuild.io
           </p>
         </div>
       </div>
