@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-const WHATSAPP_NUMBER = '2348000000000'
+const WHATSAPP_NUMBER = '2349036101623'
 const WHATSAPP_MESSAGE = "Hi Nexbuild, I'd like to discuss a project."
 
 export default function WhatsAppButton() {
