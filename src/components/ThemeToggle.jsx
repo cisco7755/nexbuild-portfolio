@@ -1,13 +1,38 @@
 import { Sun, Moon } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function ThemeToggle({ theme, toggle }) {
   return (
     <button
       onClick={toggle}
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-      className="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+      className="relative p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors overflow-hidden"
     >
-      {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+      <AnimatePresence mode="wait" initial={false}>
+        {theme === 'dark' ? (
+          <motion.span
+            key="sun"
+            initial={{ rotate: -90, opacity: 0 }}
+            animate={{ rotate: 0, opacity: 1 }}
+            exit={{ rotate: 90, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="block"
+          >
+            <Sun size={18} />
+          </motion.span>
+        ) : (
+          <motion.span
+            key="moon"
+            initial={{ rotate: 90, opacity: 0 }}
+            animate={{ rotate: 0, opacity: 1 }}
+            exit={{ rotate: -90, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="block"
+          >
+            <Moon size={18} />
+          </motion.span>
+        )}
+      </AnimatePresence>
     </button>
   )
 }

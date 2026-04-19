@@ -13,6 +13,8 @@ import Contact from './pages/Contact'
 import Insights from './pages/Insights'
 import WhatsAppButton from './components/WhatsAppButton'
 import PageTransition from './components/PageTransition'
+import ScrollProgress from './components/ScrollProgress'
+import BackToTop from './components/BackToTop'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -29,6 +31,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-slate-950 transition-colors duration-300">
       <ScrollToTop />
+      <ScrollProgress />
       <Navbar theme={theme} toggle={toggle} />
       <div className="flex-1">
         <AnimatePresence mode="wait">
@@ -46,6 +49,7 @@ export default function App() {
       </div>
       <Footer />
       <WhatsAppButton />
+      <BackToTop />
     </div>
   )
 }

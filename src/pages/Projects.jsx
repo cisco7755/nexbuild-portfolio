@@ -1,7 +1,8 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { projects } from '../utils/data'
 import ProjectCard from '../components/ProjectCard'
+import ProjectCardSkeleton from '../components/ProjectCardSkeleton'
 import CTASection from '../components/CTASection'
 
 const industries = ['All', 'Health', 'Fintech', 'Logistics', 'SaaS']
@@ -10,6 +11,12 @@ const serviceTypes = ['All', 'Web Development', 'Mobile Apps', 'Backend Systems'
 export default function Projects() {
   const [industryFilter, setIndustryFilter] = useState('All')
   const [serviceFilter, setServiceFilter] = useState('All')
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 600)
+    return () => clearTimeout(t)
+  }, [])
 
   const filtered = useMemo(() => {
     return projects.filter(p => {
@@ -95,7 +102,11 @@ export default function Projects() {
 
       <section className="section-padding pt-0">
         <div className="max-w-7xl mx-auto px-6">
-          {filtered.length > 0 ? (
+          {loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from({ length: 6 }).map((_, i) => <ProjectCardSkeleton key={i} />)}
+            </div>
+          ) : filtered.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map(project => (
                 <ProjectCard key={project.id} project={project} />

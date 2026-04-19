@@ -13,6 +13,9 @@ export default function ProjectDetail() {
   const { title, industry, category, overview, problem, solution, outcome, metrics, tech, color } =
     project
 
+  const currentIndex = projects.findIndex(p => p.id === id)
+  const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null
+  const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null
   const otherProjects = projects.filter(p => p.id !== id).slice(0, 2)
 
   return (
@@ -174,6 +177,42 @@ export default function ProjectDetail() {
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* Prev / Next navigation */}
+      {(prevProject || nextProject) && (
+        <section className="border-t border-slate-200 dark:border-slate-800">
+          <div className="max-w-7xl mx-auto px-6 py-8 flex justify-between gap-4">
+            {prevProject ? (
+              <Link
+                to={`/projects/${prevProject.id}`}
+                className="group flex items-center gap-3 text-left"
+              >
+                <ArrowLeft size={16} className="text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0" />
+                <div>
+                  <p className="text-xs text-slate-400 dark:text-slate-500 mb-0.5">Previous</p>
+                  <p className="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                    {prevProject.title}
+                  </p>
+                </div>
+              </Link>
+            ) : <div />}
+            {nextProject && (
+              <Link
+                to={`/projects/${nextProject.id}`}
+                className="group flex items-center gap-3 text-right"
+              >
+                <div>
+                  <p className="text-xs text-slate-400 dark:text-slate-500 mb-0.5">Next</p>
+                  <p className="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                    {nextProject.title}
+                  </p>
+                </div>
+                <ArrowRight size={16} className="text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0" />
+              </Link>
+            )}
           </div>
         </section>
       )}

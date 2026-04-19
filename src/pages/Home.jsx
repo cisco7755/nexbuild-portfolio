@@ -35,7 +35,22 @@ export default function Home() {
       {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/20 via-transparent to-violet-950/10 dark:from-indigo-950/40 dark:via-slate-950 dark:to-violet-950/20" />
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-indigo-500/5 dark:bg-indigo-500/10 blur-3xl pointer-events-none" />
+        {/* Animated orbs */}
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-indigo-500/8 dark:bg-indigo-500/12 blur-3xl pointer-events-none"
+          animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-500/6 dark:bg-violet-500/10 blur-3xl pointer-events-none"
+          animate={{ x: [0, -30, 0], y: [0, 40, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        />
+        <motion.div
+          className="absolute top-1/2 right-1/3 w-[300px] h-[300px] rounded-full bg-cyan-500/4 dark:bg-cyan-500/8 blur-3xl pointer-events-none"
+          animate={{ x: [0, 20, 0], y: [0, -50, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
+        />
 
         <div className="relative max-w-7xl mx-auto px-6 py-24 text-center">
           <motion.div
@@ -75,8 +90,34 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Trusted by strip */}
+      <div className="border-y border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 py-5 overflow-hidden">
+        <div className="flex items-center gap-3 mb-1 px-6 max-w-7xl mx-auto">
+          <span className="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 whitespace-nowrap">
+            Trusted by
+          </span>
+        </div>
+        <div className="relative flex overflow-hidden">
+          <motion.div
+            className="flex gap-12 items-center whitespace-nowrap px-6"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+          >
+            {[
+              'HealthTrack Network', 'ClearPay', 'FleetOps Africa', 'TalentHive',
+              'MediSync EMR', 'TradeFlow Analytics', 'HealthTrack Network', 'ClearPay',
+              'FleetOps Africa', 'TalentHive', 'MediSync EMR', 'TradeFlow Analytics',
+            ].map((name, i) => (
+              <span key={i} className="text-sm font-semibold text-slate-400 dark:text-slate-500">
+                {name}
+              </span>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+
       {/* Stats */}
-      <SectionWrapper className="bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800 !py-12">
+      <SectionWrapper className="bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800 !py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, i) => (
             <motion.div

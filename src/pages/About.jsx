@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { CheckCircle2, ArrowRight } from 'lucide-react'
+import { CheckCircle2, ArrowRight, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { stats, processSteps } from '../utils/data'
 import CTASection from '../components/CTASection'
@@ -239,6 +239,73 @@ export default function About() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Comparison table */}
+      <section className="section-padding border-t border-slate-200 dark:border-slate-800">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-12 text-center"
+          >
+            <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
+              Why Nexbuild
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+              Not all agencies are built the same.
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="overflow-x-auto"
+          >
+            <table className="w-full text-sm">
+              <thead>
+                <tr>
+                  <th className="text-left font-semibold text-slate-500 dark:text-slate-400 pb-4 pr-6 w-1/2">What you're evaluating</th>
+                  <th className="text-center font-semibold text-indigo-600 dark:text-indigo-400 pb-4 px-6">Nexbuild</th>
+                  <th className="text-center font-semibold text-slate-400 dark:text-slate-500 pb-4 pl-6">Typical agency</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                {[
+                  ['Senior devs on your project, start to finish', true, false],
+                  ['Fixed scope with hard conversations upfront', true, false],
+                  ['Codebase you can operate without us', true, false],
+                  ['Direct Slack/call access to the builder', true, false],
+                  ['Outcome metrics tracked after launch', true, false],
+                  ['Sales team separate from delivery team', false, true],
+                  ['Post-launch ghosting', false, true],
+                ].map(([label, us, them], i) => (
+                  <tr key={i} className="group">
+                    <td className="py-4 pr-6 text-slate-700 dark:text-slate-300 font-medium">{label}</td>
+                    <td className="py-4 px-6 text-center">
+                      {us ? (
+                        <CheckCircle2 size={18} className="text-indigo-500 mx-auto" />
+                      ) : (
+                        <X size={18} className="text-slate-300 dark:text-slate-600 mx-auto" />
+                      )}
+                    </td>
+                    <td className="py-4 pl-6 text-center">
+                      {them ? (
+                        <CheckCircle2 size={18} className="text-slate-300 dark:text-slate-600 mx-auto" />
+                      ) : (
+                        <X size={18} className="text-red-400 mx-auto" />
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </motion.div>
         </div>
       </section>
 

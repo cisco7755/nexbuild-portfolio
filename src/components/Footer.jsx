@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Github, Linkedin, Twitter } from 'lucide-react'
+import { Github, Linkedin, Twitter, ArrowRight } from 'lucide-react'
 
 const footerLinks = [
   {
@@ -32,8 +33,51 @@ const footerLinks = [
   },
 ]
 
+function NewsletterStrip() {
+  const [email, setEmail] = useState('')
+  const [done, setDone] = useState(false)
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    if (!email.includes('@')) return
+    setDone(true)
+  }
+
+  return (
+    <div className="bg-indigo-600 dark:bg-indigo-700">
+      <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <p className="font-heading font-bold text-white text-lg">Stay in the loop.</p>
+          <p className="text-indigo-200 text-sm">Practical engineering & product writing. No spam, ever.</p>
+        </div>
+        {done ? (
+          <p className="text-white font-semibold text-sm">You're in — thanks!</p>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex gap-2 w-full md:w-auto">
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              className="flex-1 md:w-64 px-4 py-2.5 rounded-xl text-sm bg-white/10 text-white placeholder-indigo-300 border border-white/20 focus:outline-none focus:border-white transition-colors"
+            />
+            <button
+              type="submit"
+              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white text-indigo-600 font-semibold text-sm hover:bg-indigo-50 transition-colors flex-shrink-0"
+            >
+              Subscribe <ArrowRight size={14} />
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export default function Footer() {
   return (
+    <>
+    <NewsletterStrip />
     <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
@@ -103,5 +147,6 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+    </>
   )
 }
