@@ -107,6 +107,73 @@ export default function Services() {
         )
       })}
 
+      {/* Tech Stack */}
+      <section className="section-padding bg-slate-50 dark:bg-slate-900/30 border-t border-slate-200 dark:border-slate-800">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
+              Our Stack
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              Tools we ship with
+            </h2>
+            <p className="text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
+              We choose boring, battle-tested technology over hype. Everything below has survived
+              production at scale.
+            </p>
+          </motion.div>
+
+          <div className="space-y-8">
+            {[
+              {
+                category: 'Frontend',
+                techs: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'React Native', 'Expo'],
+              },
+              {
+                category: 'Backend',
+                techs: ['Node.js', 'Python', 'FastAPI', 'Express', 'GraphQL', 'REST'],
+              },
+              {
+                category: 'Data & Storage',
+                techs: ['PostgreSQL', 'MongoDB', 'Redis', 'Supabase', 'Firebase', 'Prisma'],
+              },
+              {
+                category: 'Infrastructure',
+                techs: ['AWS', 'GCP', 'Vercel', 'Docker', 'GitHub Actions', 'Terraform'],
+              },
+            ].map((group, gi) => (
+              <motion.div
+                key={group.category}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: gi * 0.1 }}
+              >
+                <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
+                  {group.category}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {group.techs.map(tech => (
+                    <span
+                      key={tech}
+                      className="px-4 py-2 rounded-xl text-sm font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <CTASection />
     </main>
   )

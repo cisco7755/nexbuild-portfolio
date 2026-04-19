@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import { useTheme } from './hooks/useTheme'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -9,6 +10,9 @@ import ProjectDetail from './pages/ProjectDetail'
 import Services from './pages/Services'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import Insights from './pages/Insights'
+import WhatsAppButton from './components/WhatsAppButton'
+import PageTransition from './components/PageTransition'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -20,23 +24,28 @@ function ScrollToTop() {
 
 export default function App() {
   const { theme, toggle } = useTheme()
+  const location = useLocation()
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-slate-950 transition-colors duration-300">
       <ScrollToTop />
       <Navbar theme={theme} toggle={toggle} />
       <div className="flex-1">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:id" element={<ProjectDetail />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Home />} />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+            <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
+            <Route path="/projects/:id" element={<PageTransition><ProjectDetail /></PageTransition>} />
+            <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
+            <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+            <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+            <Route path="/insights" element={<PageTransition><Insights /></PageTransition>} />
+            <Route path="*" element={<PageTransition><Home /></PageTransition>} />
+          </Routes>
+        </AnimatePresence>
       </div>
       <Footer />
+      <WhatsAppButton />
     </div>
   )
 }

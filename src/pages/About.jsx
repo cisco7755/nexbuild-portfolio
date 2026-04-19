@@ -3,6 +3,7 @@ import { CheckCircle2, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { stats, processSteps } from '../utils/data'
 import CTASection from '../components/CTASection'
+import AnimatedStat from '../components/AnimatedStat'
 
 const values = [
   {
@@ -80,21 +81,7 @@ export default function About() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-20 border-b border-slate-200 dark:border-slate-800">
             {stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="text-center p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"
-              >
-                <div className="font-heading text-4xl font-black text-slate-900 dark:text-white mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-slate-500 dark:text-slate-400 font-medium">
-                  {stat.label}
-                </div>
-              </motion.div>
+              <AnimatedStat key={stat.label} stat={stat} delay={i * 0.1} />
             ))}
           </div>
         </div>

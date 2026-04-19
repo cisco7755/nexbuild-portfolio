@@ -296,3 +296,33 @@ export const processSteps = [
       'Deployment is not the finish line. We handle rollout, monitor for issues, and make sure your team is set up to operate and iterate confidently.',
   },
 ]
+
+export const testimonials = [
+  {
+    quote:
+      "Nexbuild delivered exactly what they scoped — on time, under budget. The codebase they handed over was clean enough that our in-house team could maintain it from day one.",
+    name: 'Dr. Amara Osei',
+    title: 'CTO, Regional Hospital Network',
+    industry: 'Health',
+    initials: 'AO',
+    color: 'from-emerald-500 to-teal-600',
+  },
+  {
+    quote:
+      "We'd worked with two agencies before Nexbuild. Both overpromised and underdelivered. These guys flagged a scope problem in week two that would have cost us three months if it had surfaced at launch.",
+    name: 'Tunde Adeyemi',
+    title: 'Founder, ClearPay',
+    industry: 'Fintech',
+    initials: 'TA',
+    color: 'from-indigo-500 to-violet-500',
+  },
+  {
+    quote:
+      "The dashboard went from concept to live in 11 weeks. Our ops team was tracking 200+ vehicles the next morning. I've never seen a handover that smooth.",
+    name: 'Fatima Al-Hassan',
+    title: 'Head of Operations, FleetOps',
+    industry: 'Logistics',
+    initials: 'FA',
+    color: 'from-orange-500 to-amber-500',
+  },
+]

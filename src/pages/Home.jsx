@@ -12,7 +12,7 @@ import {
   Cloud,
   CheckCircle2,
 } from 'lucide-react'
-import { projects, services, stats, industries, processSteps } from '../utils/data'
+import { projects, services, stats, industries, processSteps, testimonials } from '../utils/data'
 import ProjectCard from '../components/ProjectCard'
 import CTASection from '../components/CTASection'
 import SectionWrapper from '../components/SectionWrapper'
@@ -321,6 +321,50 @@ export default function Home() {
               </div>
             ))}
           </motion.div>
+        </div>
+      </SectionWrapper>
+
+      {/* Testimonials */}
+      <SectionWrapper className="section-padding bg-slate-50 dark:bg-slate-900/30 border-t border-slate-200 dark:border-slate-800">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div {...fadeUp} className="mb-12 text-center">
+            <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
+              Client Results
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+              Don't take our word for it.
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <motion.div
+                key={t.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                className="flex flex-col p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800"
+              >
+                {/* Quote marks */}
+                <svg className="w-8 h-8 text-indigo-200 dark:text-indigo-900 mb-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
+                </svg>
+                <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed flex-1 mb-6">
+                  "{t.quote}"
+                </p>
+                <div className="flex items-center gap-3 mt-auto">
+                  <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.color} flex items-center justify-center flex-shrink-0`}>
+                    <span className="text-white font-bold text-xs font-heading">{t.initials}</span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-slate-900 dark:text-white">{t.name}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">{t.title}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </SectionWrapper>
 
