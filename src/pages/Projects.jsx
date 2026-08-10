@@ -34,22 +34,22 @@ export default function Projects() {
   }, [industryFilter, serviceFilter])
 
   return (
-    <main className="pt-24">
-      <section className="section-padding pb-0">
-        <div className="max-w-7xl mx-auto px-6">
+    <main className="pt-20">
+      <section className="pt-0 pb-0">
+        <div className="max-w-[1800px] mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-2xl mb-12"
+            className="max-w-2xl mb-8 md:mb-12"
           >
             <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
               Case Studies
             </span>
-            <h1 className="font-heading text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-4 leading-tight">
+            <h1 className="font-heading text-5xl md:text-6xl font-black text-ink-500 dark:text-white mb-4 leading-tight">
               Projects that moved the needle
             </h1>
-            <p className="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
+            <p className="text-lg text-ink-300 dark:text-ink-200 leading-relaxed">
               Every project here includes the actual problem, what we built, and the measurable
               outcome. No vague descriptions.
             </p>
@@ -60,12 +60,12 @@ export default function Projects() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="flex flex-wrap gap-6 mb-12 p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800"
+            className="grid grid-cols-2 sm:flex sm:flex-wrap gap-4 mb-8 md:gap-6 md:mb-12 p-4 md:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800"
           >
             {trustStats.map(s => (
               <div key={s.label} className="flex items-center gap-3">
                 <span className="font-heading font-black text-2xl text-indigo-600 dark:text-indigo-400">{s.value}</span>
-                <span className="text-sm text-slate-500 dark:text-slate-400 font-medium">{s.label}</span>
+                <span className="text-sm text-ink-300 dark:text-ink-200 font-medium">{s.label}</span>
               </div>
             ))}
           </motion.div>
@@ -75,10 +75,10 @@ export default function Projects() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-wrap gap-6 mb-12"
+            className="flex flex-wrap gap-4 mb-8 md:gap-6 md:mb-12"
           >
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
+              <p className="text-xs font-semibold uppercase tracking-wider text-ink-200 dark:text-ink-300 mb-2">
                 Industry
               </p>
               <div className="flex flex-wrap gap-2">
@@ -89,7 +89,7 @@ export default function Projects() {
                     className={`text-sm px-4 py-1.5 rounded-lg font-medium transition-colors ${
                       industryFilter === f
                         ? 'bg-indigo-600 text-white'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                        : 'bg-slate-100 dark:bg-slate-800 text-ink-400 dark:text-ink-200 hover:bg-slate-200 dark:hover:bg-slate-700'
                     }`}
                   >
                     {f}
@@ -99,7 +99,7 @@ export default function Projects() {
             </div>
 
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
+              <p className="text-xs font-semibold uppercase tracking-wider text-ink-200 dark:text-ink-300 mb-2">
                 Service
               </p>
               <div className="flex flex-wrap gap-2">
@@ -110,7 +110,7 @@ export default function Projects() {
                     className={`text-sm px-4 py-1.5 rounded-lg font-medium transition-colors ${
                       serviceFilter === f
                         ? 'bg-indigo-600 text-white'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                        : 'bg-slate-100 dark:bg-slate-800 text-ink-400 dark:text-ink-200 hover:bg-slate-200 dark:hover:bg-slate-700'
                     }`}
                   >
                     {f}
@@ -123,7 +123,7 @@ export default function Projects() {
       </section>
 
       <section className="section-padding pt-0">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1800px] mx-auto px-6">
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {Array.from({ length: 6 }).map((_, i) => <ProjectCardSkeleton key={i} />)}
@@ -136,7 +136,7 @@ export default function Projects() {
             </div>
           ) : (
             <div className="text-center py-20">
-              <p className="text-slate-400 dark:text-slate-500 text-lg">
+              <p className="text-ink-200 dark:text-ink-300 text-lg">
                 No projects match those filters.
               </p>
               <button

@@ -19,10 +19,10 @@ export default function ProjectDetail() {
   const otherProjects = projects.filter(p => p.id !== id).slice(0, 2)
 
   return (
-    <main className="pt-24">
+    <main className="pt-20">
       {/* Hero */}
-      <section className="section-padding pb-0">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="pt-0 pb-0">
+        <div className="max-w-[1800px] mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -30,7 +30,7 @@ export default function ProjectDetail() {
           >
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-8"
+              className="inline-flex items-center gap-2 text-sm text-ink-300 dark:text-ink-200 hover:text-ink-500 dark:hover:text-white transition-colors mb-8"
             >
               <ArrowLeft size={14} /> Back to Projects
             </Link>
@@ -39,28 +39,28 @@ export default function ProjectDetail() {
               <span className="text-xs font-semibold px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900">
                 {industry}
               </span>
-              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-ink-400 dark:text-ink-200">
                 {category}
               </span>
             </div>
 
-            <h1 className="font-heading text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-8 leading-tight max-w-3xl">
+            <h1 className="font-heading text-5xl md:text-6xl font-black text-ink-500 dark:text-white mb-8 leading-tight max-w-3xl">
               {title}
             </h1>
 
             {/* Tech stack */}
-            <div className="flex flex-wrap gap-2 mb-10">
+            <div className="flex flex-wrap gap-2 mb-6 md:mb-10">
               {tech.map(t => (
                 <span
                   key={t}
-                  className="text-sm px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-medium"
+                  className="text-sm px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-ink-400 dark:text-ink-200 font-medium"
                 >
                   {t}
                 </span>
               ))}
             </div>
 
-            {/* Live link — visible on mobile only; desktop shows it in sidebar */}
+            {/* Live link   visible on mobile only; desktop shows it in sidebar */}
             {liveUrl && (
               <a
                 href={liveUrl}
@@ -77,7 +77,7 @@ export default function ProjectDetail() {
 
       {/* Visual Banner */}
       <section className="py-8">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1800px] mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -105,7 +105,7 @@ export default function ProjectDetail() {
 
       {/* Metrics */}
       <section className="py-12 bg-slate-50 dark:bg-slate-900/30 border-y border-slate-200 dark:border-slate-800">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1800px] mx-auto px-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             {metrics.map((metric, i) => (
               <motion.div
@@ -119,7 +119,7 @@ export default function ProjectDetail() {
                 <div className="font-heading text-4xl md:text-5xl font-black text-indigo-600 dark:text-indigo-400 mb-1">
                   {metric.value}
                 </div>
-                <div className="text-sm text-slate-500 dark:text-slate-400 font-medium">
+                <div className="text-sm text-ink-300 dark:text-ink-200 font-medium">
                   {metric.label}
                 </div>
               </motion.div>
@@ -130,7 +130,7 @@ export default function ProjectDetail() {
 
       {/* Content + Scope sidebar */}
       <section className="section-padding">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1800px] mx-auto px-6">
           <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
 
             {/* Main narrative */}
@@ -147,10 +147,10 @@ export default function ProjectDetail() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                 >
-                  <h2 className="font-heading text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                  <h2 className="font-heading text-2xl font-bold text-ink-500 dark:text-white mb-4">
                     {section.label}
                   </h2>
-                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
+                  <p className="text-ink-400 dark:text-ink-200 leading-relaxed text-lg">
                     {section.content}
                   </p>
                 </motion.div>
@@ -163,25 +163,25 @@ export default function ProjectDetail() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                <h2 className="font-heading text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                <h2 className="font-heading text-2xl font-bold text-ink-500 dark:text-white mb-4">
                   The Outcome
                 </h2>
-                <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg mb-8">
+                <p className="text-ink-400 dark:text-ink-200 leading-relaxed text-lg mb-8">
                   {outcome}
                 </p>
 
                 {/* Mid-page CTA */}
-                <div className="p-6 rounded-2xl bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900">
+                <div className="p-4 md:p-6 rounded-2xl bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900">
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center flex-shrink-0">
                       <MessageCircle size={18} className="text-white" />
                     </div>
                     <div>
-                      <p className="font-heading font-bold text-slate-900 dark:text-white mb-1">
+                      <p className="font-heading font-bold text-ink-500 dark:text-white mb-1">
                         Building something similar?
                       </p>
-                      <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
-                        We bring the same structured approach — clear scope, real deliverables, measurable outcomes — to every engagement.
+                      <p className="text-sm text-ink-300 dark:text-ink-200 mb-4">
+                        We bring the same structured approach   clear scope, real deliverables, measurable outcomes   to every engagement.
                       </p>
                       <Link
                         to="/contact"
@@ -204,24 +204,24 @@ export default function ProjectDetail() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800"
+                  className="p-4 md:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800"
                 >
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-5">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-200 dark:text-ink-300 mb-5">
                     Engagement at a glance
                   </h3>
                   <div className="space-y-4">
                     <div>
-                      <p className="text-xs text-slate-400 dark:text-slate-500 mb-1">Type</p>
-                      <p className="text-sm font-semibold text-slate-900 dark:text-white">{category}</p>
+                      <p className="text-xs text-ink-200 dark:text-ink-300 mb-1">Type</p>
+                      <p className="text-sm font-semibold text-ink-500 dark:text-white">{category}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400 dark:text-slate-500 mb-1">Industry</p>
-                      <p className="text-sm font-semibold text-slate-900 dark:text-white">{industry}</p>
+                      <p className="text-xs text-ink-200 dark:text-ink-300 mb-1">Industry</p>
+                      <p className="text-sm font-semibold text-ink-500 dark:text-white">{industry}</p>
                     </div>
                     {duration && (
                       <div>
-                        <p className="text-xs text-slate-400 dark:text-slate-500 mb-1">Duration</p>
-                        <p className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
+                        <p className="text-xs text-ink-200 dark:text-ink-300 mb-1">Duration</p>
+                        <p className="text-sm font-semibold text-ink-500 dark:text-white flex items-center gap-1.5">
                           <Clock size={13} className="text-indigo-500" /> {duration}
                         </p>
                       </div>
@@ -235,14 +235,14 @@ export default function ProjectDetail() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
-                    className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800"
+                    className="p-4 md:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800"
                   >
-                    <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-5">
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-200 dark:text-ink-300 mb-5">
                       What we delivered
                     </h3>
                     <ul className="space-y-3">
                       {deliverables.map(d => (
-                        <li key={d} className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
+                        <li key={d} className="flex items-start gap-2.5 text-sm text-ink-400 dark:text-ink-100">
                           <CheckCircle2 size={15} className="text-indigo-500 flex-shrink-0 mt-0.5" />
                           {d}
                         </li>
@@ -277,9 +277,9 @@ export default function ProjectDetail() {
       {/* More Projects */}
       {otherProjects.length > 0 && (
         <section className="section-padding bg-slate-50 dark:bg-slate-900/30 border-t border-slate-200 dark:border-slate-800">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-[1800px] mx-auto px-6">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="font-heading text-2xl font-bold text-slate-900 dark:text-white">
+              <h2 className="font-heading text-2xl font-bold text-ink-500 dark:text-white">
                 More work
               </h2>
               <Link
@@ -313,16 +313,16 @@ export default function ProjectDetail() {
       {/* Prev / Next navigation */}
       {(prevProject || nextProject) && (
         <section className="border-t border-slate-200 dark:border-slate-800">
-          <div className="max-w-7xl mx-auto px-6 py-8 flex justify-between gap-4">
+          <div className="max-w-[1800px] mx-auto px-6 py-8 flex justify-between gap-4">
             {prevProject ? (
               <Link
                 to={`/projects/${prevProject.id}`}
                 className="group flex items-center gap-3 text-left"
               >
-                <ArrowLeft size={16} className="text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0" />
+                <ArrowLeft size={16} className="text-ink-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0" />
                 <div>
-                  <p className="text-xs text-slate-400 dark:text-slate-500 mb-0.5">Previous</p>
-                  <p className="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                  <p className="text-xs text-ink-200 dark:text-ink-300 mb-0.5">Previous</p>
+                  <p className="text-sm font-semibold text-ink-500 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                     {prevProject.title}
                   </p>
                 </div>
@@ -334,12 +334,12 @@ export default function ProjectDetail() {
                 className="group flex items-center gap-3 text-right"
               >
                 <div>
-                  <p className="text-xs text-slate-400 dark:text-slate-500 mb-0.5">Next</p>
-                  <p className="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                  <p className="text-xs text-ink-200 dark:text-ink-300 mb-0.5">Next</p>
+                  <p className="text-sm font-semibold text-ink-500 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                     {nextProject.title}
                   </p>
                 </div>
-                <ArrowRight size={16} className="text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0" />
+                <ArrowRight size={16} className="text-ink-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0" />
               </Link>
             )}
           </div>

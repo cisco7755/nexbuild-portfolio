@@ -24,12 +24,12 @@ export default function AnimatedStat({ stat, delay = 0 }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="text-center p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"
+      className="text-center p-4 md:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"
     >
-      <div className="font-heading text-4xl font-black text-slate-900 dark:text-white mb-1">
+      <div className="font-heading text-4xl font-black text-ink-500 dark:text-white mb-1">
         <StatValue raw={stat.value} />
       </div>
-      <div className="text-sm text-slate-500 dark:text-slate-400 font-medium">
+      <div className="text-sm text-ink-300 dark:text-ink-200 font-medium">
         {stat.label}
       </div>
     </motion.div>

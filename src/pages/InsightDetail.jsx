@@ -14,7 +14,7 @@ const articles = [
     body: [
       {
         type: 'p',
-        text: "Ask a failed software project team what went wrong and you'll hear about missed deadlines, scope creep, and 'the requirements kept changing.' What you won't hear — because it's harder to admit — is that nobody defined the actual problem before the first line of code was written.",
+        text: "Ask a failed software project team what went wrong and you'll hear about missed deadlines, scope creep, and 'the requirements kept changing.' What you won't hear   because it's harder to admit   is that nobody defined the actual problem before the first line of code was written.",
       },
       {
         type: 'h2',
@@ -26,7 +26,7 @@ const articles = [
       },
       {
         type: 'p',
-        text: "Every time a stakeholder says 'can we also add…' during development, it's not a new requirement appearing — it's an old requirement that was never surfaced. The discovery process failed.",
+        text: "Every time a stakeholder says 'can we also add…' during development, it's not a new requirement appearing   it's an old requirement that was never surfaced. The discovery process failed.",
       },
       {
         type: 'h2',
@@ -40,7 +40,7 @@ const articles = [
         type: 'list',
         items: [
           'What is the specific user action that is currently broken, slow, or missing?',
-          'What does success look like in a number — not a feeling?',
+          'What does success look like in a number   not a feeling?',
           'What is the minimum surface area of software required to achieve that number?',
           'What are we explicitly not building in this engagement?',
         ],
@@ -55,7 +55,7 @@ const articles = [
       },
       {
         type: 'p',
-        text: "Every NexaStack Technologies engagement starts with a structured discovery sprint before any code is written. We spend the first one to two weeks doing three things: mapping the current workflow end to end, identifying the exact constraint that limits business performance, and writing one sentence that describes what we're building and why it will move the constraint.",
+        text: "Every Quoxova engagement starts with a structured discovery sprint before any code is written. We spend the first one to two weeks doing three things: mapping the current workflow end to end, identifying the exact constraint that limits business performance, and writing one sentence that describes what we're building and why it will move the constraint.",
       },
       {
         type: 'p',
@@ -93,7 +93,7 @@ const articles = [
       },
       {
         type: 'p',
-        text: "We design every financial transaction endpoint with idempotency keys from the start — not as a retrofit. The client generates a UUID before the request, sends it in the header, and the server uses it to deduplicate. If the same request arrives twice, the second one returns the same result as the first without re-executing.",
+        text: "We design every financial transaction endpoint with idempotency keys from the start   not as a retrofit. The client generates a UUID before the request, sends it in the header, and the server uses it to deduplicate. If the same request arrives twice, the second one returns the same result as the first without re-executing.",
       },
       {
         type: 'h2',
@@ -109,7 +109,7 @@ const articles = [
       },
       {
         type: 'p',
-        text: "If you're building a fintech product that operates across Nigeria, Ghana, and Kenya, you're dealing with NGN, GHS, and KES — and the exchange rates between them change daily. We never store amounts as floats (floating-point precision errors in financial calculations are a nightmare). We store all monetary values as integers in the smallest currency unit (kobo for NGN, pesewa for GHS) and handle display formatting in a single utility layer.",
+        text: "If you're building a fintech product that operates across Nigeria, Ghana, and Kenya, you're dealing with NGN, GHS, and KES   and the exchange rates between them change daily. We never store amounts as floats (floating-point precision errors in financial calculations are a nightmare). We store all monetary values as integers in the smallest currency unit (kobo for NGN, pesewa for GHS) and handle display formatting in a single utility layer.",
       },
       {
         type: 'h2',
@@ -118,11 +118,11 @@ const articles = [
       {
         type: 'list',
         items: [
-          'Node.js + Express for API layers — fast to iterate, massive ecosystem for payment integrations',
-          'PostgreSQL for all financial data — ACID compliance is non-negotiable',
+          'Node.js + Express for API layers   fast to iterate, massive ecosystem for payment integrations',
+          'PostgreSQL for all financial data   ACID compliance is non-negotiable',
           'Redis for idempotency key storage and rate limiting',
-          'BullMQ for async job queues — webhook retries, statement generation, notification dispatch',
-          'Paystack or Flutterwave for payment rails — both have solid Nigerian bank coverage',
+          'BullMQ for async job queues   webhook retries, statement generation, notification dispatch',
+          'Paystack or Flutterwave for payment rails   both have solid Nigerian bank coverage',
         ],
       },
       {
@@ -145,7 +145,7 @@ const articles = [
     body: [
       {
         type: 'p',
-        text: "If you've hired a software agency before, you may have noticed something: the person who sold you the project — articulate, experienced, clearly understood your business — is not the person who shows up to the kickoff call. And they're definitely not writing the code.",
+        text: "If you've hired a software agency before, you may have noticed something: the person who sold you the project   articulate, experienced, clearly understood your business   is not the person who shows up to the kickoff call. And they're definitely not writing the code.",
       },
       {
         type: 'h2',
@@ -153,7 +153,7 @@ const articles = [
       },
       {
         type: 'p',
-        text: "Large agencies have a business model problem. Senior engineers are expensive. Sales cycles are uncertain. The solution most agencies land on is to staff sales with senior people who can close deals, then hand those deals to a 'delivery team' — often a mix of mid-level and junior engineers — to execute at a lower cost margin.",
+        text: "Large agencies have a business model problem. Senior engineers are expensive. Sales cycles are uncertain. The solution most agencies land on is to staff sales with senior people who can close deals, then hand those deals to a 'delivery team'   often a mix of mid-level and junior engineers   to execute at a lower cost margin.",
       },
       {
         type: 'p',
@@ -182,7 +182,7 @@ const articles = [
       },
       {
         type: 'p',
-        text: "At NexaStack Technologies, the engineers on your project are the engineers in your discovery sessions. There is no delivery team waiting behind a wall. We keep engagements to a size where this is sustainable — which means we turn down projects when we're at capacity rather than staffing them with people who don't have context.",
+        text: "At Quoxova, the engineers on your project are the engineers in your discovery sessions. There is no delivery team waiting behind a wall. We keep engagements to a size where this is sustainable   which means we turn down projects when we're at capacity rather than staffing them with people who don't have context.",
       },
     ],
   },
@@ -204,7 +204,7 @@ const articles = [
       },
       {
         type: 'p',
-        text: "If you're handing the codebase to an in-house team after launch, the framework choice is also a hiring decision. React Native developers are easier to hire — the pool is larger, and any strong React web developer can become productive in React Native within a few weeks. Flutter requires Dart, which narrows your hiring pool significantly outside of large tech centers.",
+        text: "If you're handing the codebase to an in-house team after launch, the framework choice is also a hiring decision. React Native developers are easier to hire   the pool is larger, and any strong React web developer can become productive in React Native within a few weeks. Flutter requires Dart, which narrows your hiring pool significantly outside of large tech centers.",
       },
       {
         type: 'h2',
@@ -215,7 +215,7 @@ const articles = [
         items: [
           'You have an existing React web codebase and want to share logic between web and mobile',
           'Your team already knows JavaScript/TypeScript',
-          'You need deep integration with native modules — the bridge ecosystem is more mature',
+          'You need deep integration with native modules   the bridge ecosystem is more mature',
           'Hiring and long-term maintenance are a consideration',
         ],
       },
@@ -238,7 +238,7 @@ const articles = [
       },
       {
         type: 'p',
-        text: "For most product teams building a standard mobile application — user authentication, data fetching, forms, push notifications, a few screens — React Native with Expo is the faster path to production. The ecosystem is larger, the tooling is more mature for common use cases, and the JavaScript/TypeScript knowledge is more transferable.",
+        text: "For most product teams building a standard mobile application   user authentication, data fetching, forms, push notifications, a few screens   React Native with Expo is the faster path to production. The ecosystem is larger, the tooling is more mature for common use cases, and the JavaScript/TypeScript knowledge is more transferable.",
       },
       {
         type: 'p',
@@ -268,7 +268,7 @@ const articles = [
       },
       {
         type: 'p',
-        text: "Before you build anything, calculate what the current broken process costs per month — in staff hours, error rates, delayed decisions, or lost revenue. This is your baseline. If you don't have this number, you have no way to evaluate success.",
+        text: "Before you build anything, calculate what the current broken process costs per month   in staff hours, error rates, delayed decisions, or lost revenue. This is your baseline. If you don't have this number, you have no way to evaluate success.",
       },
       {
         type: 'h3',
@@ -326,7 +326,7 @@ const articles = [
       },
       {
         type: 'p',
-        text: "Atomicity, consistency, isolation, and durability — the four ACID properties — are what guarantee that your database reflects reality. When a transaction fails halfway through, ACID-compliant databases roll it back. Non-ACID systems leave you with partial writes that corrupt your data silently.",
+        text: "Atomicity, consistency, isolation, and durability   the four ACID properties   are what guarantee that your database reflects reality. When a transaction fails halfway through, ACID-compliant databases roll it back. Non-ACID systems leave you with partial writes that corrupt your data silently.",
       },
       {
         type: 'p',
@@ -338,7 +338,7 @@ const articles = [
       },
       {
         type: 'p',
-        text: "The argument for schema-less databases is that you can store anything without migration. The counter-argument is that if you can store anything, you will — and six months later your documents have fifteen different shapes and querying them consistently requires application-layer code that should have been a constraint.",
+        text: "The argument for schema-less databases is that you can store anything without migration. The counter-argument is that if you can store anything, you will   and six months later your documents have fifteen different shapes and querying them consistently requires application-layer code that should have been a constraint.",
       },
       {
         type: 'p',
@@ -350,7 +350,7 @@ const articles = [
       },
       {
         type: 'p',
-        text: "Postgres has 30 years of production usage. The failure modes are documented. The tooling is excellent — pgAdmin, Supabase, Railway, RDS, Cloud SQL. Monitoring, backup, replication, read replicas: all solved problems with multiple good options. When you hit a problem, the answer is on Stack Overflow.",
+        text: "Postgres has 30 years of production usage. The failure modes are documented. The tooling is excellent   pgAdmin, Supabase, Railway, RDS, Cloud SQL. Monitoring, backup, replication, read replicas: all solved problems with multiple good options. When you hit a problem, the answer is on Stack Overflow.",
       },
       {
         type: 'h2',
@@ -359,7 +359,7 @@ const articles = [
       {
         type: 'list',
         items: [
-          'Redis: for caching, rate limiting, session storage, and pub/sub — not as a primary database',
+          'Redis: for caching, rate limiting, session storage, and pub/sub   not as a primary database',
           'MongoDB: when the document model genuinely fits (content management, product catalogs with highly variable attributes)',
           'ClickHouse or BigQuery: for analytics workloads with billions of rows where OLAP performance matters',
           'Vector databases (pgvector first): for semantic search and AI embedding storage',
@@ -384,21 +384,21 @@ function renderBody(blocks) {
   return blocks.map((block, i) => {
     if (block.type === 'p') {
       return (
-        <p key={i} className="text-slate-600 dark:text-slate-300 leading-relaxed text-base mb-5">
+        <p key={i} className="text-ink-400 dark:text-ink-100 leading-relaxed text-base mb-5">
           {block.text}
         </p>
       )
     }
     if (block.type === 'h2') {
       return (
-        <h2 key={i} className="font-heading text-xl md:text-2xl font-bold text-slate-900 dark:text-white mt-10 mb-4">
+        <h2 key={i} className="font-heading text-xl md:text-2xl font-bold text-ink-500 dark:text-white mt-10 mb-4">
           {block.text}
         </h2>
       )
     }
     if (block.type === 'h3') {
       return (
-        <h3 key={i} className="font-heading text-lg font-bold text-slate-900 dark:text-white mt-6 mb-3">
+        <h3 key={i} className="font-heading text-lg font-bold text-ink-500 dark:text-white mt-6 mb-3">
           {block.text}
         </h3>
       )
@@ -407,7 +407,7 @@ function renderBody(blocks) {
       return (
         <ul key={i} className="space-y-3 mb-6 pl-1">
           {block.items.map((item, j) => (
-            <li key={j} className="flex gap-3 text-slate-600 dark:text-slate-300 text-base leading-relaxed">
+            <li key={j} className="flex gap-3 text-ink-400 dark:text-ink-100 text-base leading-relaxed">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0 mt-2.5" />
               {item}
             </li>
@@ -430,9 +430,9 @@ export default function InsightDetail() {
   const prevArticle = currentIndex > 0 ? articles[currentIndex - 1] : null
 
   return (
-    <main className="pt-24">
+    <main className="pt-20">
       {/* Hero */}
-      <section className="section-padding pb-0">
+      <section className="pt-0 pb-0">
         <div className="max-w-3xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -441,7 +441,7 @@ export default function InsightDetail() {
           >
             <Link
               to="/insights"
-              className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-8"
+              className="inline-flex items-center gap-2 text-sm text-ink-300 dark:text-ink-200 hover:text-ink-500 dark:hover:text-white transition-colors mb-8"
             >
               <ArrowLeft size={14} /> Back to Insights
             </Link>
@@ -450,16 +450,16 @@ export default function InsightDetail() {
               <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${tagColors[article.tag]}`}>
                 {article.tag}
               </span>
-              <span className="flex items-center gap-1 text-xs text-slate-400 dark:text-slate-500">
+              <span className="flex items-center gap-1 text-xs text-ink-200 dark:text-ink-300">
                 <Clock size={12} /> {article.readTime} read
               </span>
             </div>
 
-            <h1 className="font-heading text-3xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight mb-6">
+            <h1 className="font-heading text-3xl md:text-5xl font-black text-ink-500 dark:text-white leading-tight mb-6">
               {article.title}
             </h1>
 
-            <p className="text-lg text-slate-500 dark:text-slate-400 leading-relaxed mb-10 border-b border-slate-200 dark:border-slate-800 pb-10">
+            <p className="text-lg text-ink-300 dark:text-ink-200 leading-relaxed mb-6 md:mb-10 border-b border-slate-200 dark:border-slate-800 pb-10">
               {article.excerpt}
             </p>
           </motion.div>
@@ -483,8 +483,8 @@ export default function InsightDetail() {
               <span className="text-white font-bold text-sm font-heading">N</span>
             </div>
             <div>
-              <p className="font-semibold text-slate-900 dark:text-white text-sm">NexaStack Technologies Engineering</p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">Lagos, Nigeria · hello@NexaStack Technologies.io</p>
+              <p className="font-semibold text-ink-500 dark:text-white text-sm">Quoxova Engineering</p>
+              <p className="text-xs text-ink-300 dark:text-ink-200">Lagos, Nigeria · hello@quoxova.io</p>
             </div>
           </div>
 
@@ -493,10 +493,10 @@ export default function InsightDetail() {
             <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex justify-between gap-4">
               {prevArticle ? (
                 <Link to={`/insights/${prevArticle.slug}`} className="group flex items-center gap-3 text-left max-w-xs">
-                  <ArrowLeft size={16} className="text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0" />
+                  <ArrowLeft size={16} className="text-ink-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0" />
                   <div>
-                    <p className="text-xs text-slate-400 mb-0.5">Previous</p>
-                    <p className="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
+                    <p className="text-xs text-ink-200 mb-0.5">Previous</p>
+                    <p className="text-sm font-semibold text-ink-500 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
                       {prevArticle.title}
                     </p>
                   </div>
@@ -505,12 +505,12 @@ export default function InsightDetail() {
               {nextArticle && (
                 <Link to={`/insights/${nextArticle.slug}`} className="group flex items-center gap-3 text-right max-w-xs">
                   <div>
-                    <p className="text-xs text-slate-400 mb-0.5">Next</p>
-                    <p className="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
+                    <p className="text-xs text-ink-200 mb-0.5">Next</p>
+                    <p className="text-sm font-semibold text-ink-500 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
                       {nextArticle.title}
                     </p>
                   </div>
-                  <ArrowRight size={16} className="text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0" />
+                  <ArrowRight size={16} className="text-ink-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0" />
                 </Link>
               )}
             </div>

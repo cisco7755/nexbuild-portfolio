@@ -5,8 +5,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        heading: ['Outfit', 'Inter', 'sans-serif'],
+        sans: ['DM Sans', 'system-ui', 'sans-serif'],
+        heading: ['DM Sans', 'system-ui', 'sans-serif'],
       },
       colors: {
         brand: {
@@ -16,6 +16,13 @@ export default {
           600: '#4f46e5',
           700: '#4338ca',
           900: '#312e81',
+        },
+        ink: {
+          100: '#CCCCCC',
+          200: '#999999',
+          300: '#666666',
+          400: '#333333',
+          500: '#212121',
         },
       },
     },

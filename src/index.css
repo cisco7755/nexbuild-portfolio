@@ -8,13 +8,13 @@
   }
 
   body {
-    @apply bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50;
-    font-family: 'Inter', system-ui, sans-serif;
+    @apply bg-white dark:bg-slate-950 text-ink-500 dark:text-slate-50;
+    font-family: 'DM Sans', system-ui, sans-serif;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Outfit', Inter, sans-serif;
+    font-family: 'DM Sans', system-ui, sans-serif;
   }
 
   ::-webkit-scrollbar {

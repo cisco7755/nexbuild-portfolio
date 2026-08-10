@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(lsof -ti:5173,5174)",
+      "Bash(ps -p 92350 -o pid,command)",
+      "Bash(lsof -i :5173 -sTCP:LISTEN)",
+      "Bash(npx vite *)",
+      "Bash(perl -0pi -e ' *)",
+      "Bash(perl -pi -e 's/aspect-\\\\[4\\\\/3\\\\]/aspect-[8\\\\/3]/g' src/components/ProjectCard.jsx src/components/ProjectCardSkeleton.jsx)"
+    ]
+  }
+}

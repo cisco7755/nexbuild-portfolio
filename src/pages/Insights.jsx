@@ -71,9 +71,9 @@ export default function Insights() {
   const [featured, ...rest] = articles
 
   return (
-    <main className="pt-24">
-      <section className="section-padding pb-0">
-        <div className="max-w-7xl mx-auto px-6">
+    <main className="pt-20">
+      <section className="pt-0 pb-0">
+        <div className="max-w-[1800px] mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -83,12 +83,12 @@ export default function Insights() {
             <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
               Insights
             </span>
-            <h1 className="font-heading text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-4 leading-tight">
+            <h1 className="font-heading text-5xl md:text-6xl font-black text-ink-500 dark:text-white mb-4 leading-tight">
               How we think.
             </h1>
-            <p className="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
+            <p className="text-lg text-ink-300 dark:text-ink-200 leading-relaxed">
               Practical writing on software engineering, client work, and building products that last.
-              No fluff, no hot takes — just things we've actually learned.
+              No fluff, no hot takes   just things we've actually learned.
             </p>
           </motion.div>
 
@@ -108,14 +108,14 @@ export default function Insights() {
                   <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${tagColors[featured.tag]}`}>
                     {featured.tag}
                   </span>
-                  <span className="flex items-center gap-1 text-xs text-slate-400">
+                  <span className="flex items-center gap-1 text-xs text-ink-200">
                     <Clock size={12} /> {featured.readTime} read
                   </span>
                 </div>
-                <h2 className="font-heading text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-4 leading-snug">
+                <h2 className="font-heading text-2xl md:text-3xl font-bold text-ink-500 dark:text-white mb-4 leading-snug">
                   {featured.title}
                 </h2>
-                <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
+                <p className="text-ink-300 dark:text-ink-200 leading-relaxed mb-6">
                   {featured.excerpt}
                 </p>
                 <Link to={`/insights/${featured.slug}`} className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:gap-3 transition-all">
@@ -129,7 +129,7 @@ export default function Insights() {
 
       {/* Article grid */}
       <section className="section-padding pt-0">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-[1800px] mx-auto px-6">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {rest.map((article, i) => (
               <motion.div
@@ -141,7 +141,7 @@ export default function Insights() {
               >
                 <Link
                   to={`/insights/${article.slug}`}
-                  className="group flex flex-col p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-indigo-200 dark:hover:border-indigo-800 transition-colors h-full"
+                  className="group flex flex-col p-4 md:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-indigo-200 dark:hover:border-indigo-800 transition-colors h-full"
                 >
                   <div className={`h-32 rounded-xl bg-gradient-to-br ${article.color} mb-5 flex items-center justify-center`}>
                     <span className="text-white/20 font-heading font-black text-5xl select-none">
@@ -152,14 +152,14 @@ export default function Insights() {
                     <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${tagColors[article.tag]}`}>
                       {article.tag}
                     </span>
-                    <span className="flex items-center gap-1 text-xs text-slate-400">
+                    <span className="flex items-center gap-1 text-xs text-ink-200">
                       <Clock size={12} /> {article.readTime} read
                     </span>
                   </div>
-                  <h3 className="font-heading font-bold text-slate-900 dark:text-white mb-2 leading-snug group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                  <h3 className="font-heading font-bold text-ink-500 dark:text-white mb-2 leading-snug group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                     {article.title}
                   </h3>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed flex-1 mb-4">
+                  <p className="text-sm text-ink-300 dark:text-ink-200 leading-relaxed flex-1 mb-4">
                     {article.excerpt}
                   </p>
                   <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 group-hover:gap-2.5 transition-all">

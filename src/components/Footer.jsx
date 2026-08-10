@@ -62,13 +62,13 @@ function NewsletterStrip() {
 
   return (
     <div className="bg-indigo-600 dark:bg-indigo-700">
-      <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="max-w-[1800px] mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
           <p className="font-heading font-bold text-white text-lg">Stay in the loop.</p>
           <p className="text-indigo-200 text-sm">Practical engineering & product writing. No spam, ever.</p>
         </div>
         {done ? (
-          <p className="text-white font-semibold text-sm">You're in — check your inbox.</p>
+          <p className="text-white font-semibold text-sm">You're in   check your inbox.</p>
         ) : (
           <div className="w-full md:w-auto">
             <form onSubmit={handleSubmit} className="flex gap-2 w-full md:w-auto">
@@ -100,16 +100,16 @@ export default function Footer() {
     <>
     <NewsletterStrip />
     <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
-      <div className="max-w-7xl mx-auto px-6 py-16">
+      <div className="max-w-[1800px] mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-2.5 mb-4">
               <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-sm font-heading">N</span>
+                <span className="text-white font-bold text-sm font-heading">Q</span>
               </div>
-              <span className="font-heading font-bold text-lg text-slate-900 dark:text-white">NexaStack Technologies</span>
+              <span className="font-heading font-bold text-lg text-ink-500 dark:text-white">Quoxova</span>
             </Link>
-            <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
+            <p className="text-ink-300 dark:text-ink-200 text-sm leading-relaxed mb-6">
               We design and build software that helps businesses launch faster and scale without friction.
             </p>
             <div className="flex items-center gap-3">
@@ -118,7 +118,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="p-2 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="p-2 rounded-lg text-ink-200 hover:text-ink-400 dark:hover:text-ink-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <Github size={16} />
               </a>
@@ -127,7 +127,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="p-2 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="p-2 rounded-lg text-ink-200 hover:text-ink-400 dark:hover:text-ink-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <Linkedin size={16} />
               </a>
@@ -136,7 +136,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter / X"
-                className="p-2 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="p-2 rounded-lg text-ink-200 hover:text-ink-400 dark:hover:text-ink-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <Twitter size={16} />
               </a>
@@ -145,7 +145,7 @@ export default function Footer() {
 
           {footerLinks.map(group => (
             <div key={group.title}>
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-ink-200 dark:text-ink-300 mb-4">
                 {group.title}
               </h4>
               <ul className="space-y-3">
@@ -153,7 +153,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       to={link.to}
-                      className="text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+                      className="text-sm text-ink-400 dark:text-ink-200 hover:text-ink-500 dark:hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -165,10 +165,10 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-slate-400 dark:text-slate-500">
-            &copy; {new Date().getFullYear()} NexaStack Technologies. All rights reserved.
+          <p className="text-sm text-ink-200 dark:text-ink-300">
+            &copy; {new Date().getFullYear()} Quoxova. All rights reserved.
           </p>
-          <p className="text-sm text-slate-400 dark:text-slate-500">
+          <p className="text-sm text-ink-200 dark:text-ink-300">
             {import.meta.env.VITE_COMPANY_LOCATION} · {import.meta.env.VITE_CONTACT_EMAIL}
           </p>
         </div>

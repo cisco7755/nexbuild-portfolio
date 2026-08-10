@@ -15,7 +15,7 @@ export default async function handler(req, res) {
 
   try {
     await resend.emails.send({
-      from: 'NexaStack Technologies Contact Form <onboarding@resend.dev>',
+      from: 'Quoxova Contact Form <onboarding@resend.dev>',
       to: process.env.CONTACT_EMAIL,
       replyTo: email,
       subject: `New inquiry from ${name}${company ? ` — ${company}` : ''}`,
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
         <div style="font-family: Inter, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px; background: #f8fafc; border-radius: 12px;">
           <div style="background: #4f46e5; border-radius: 8px; padding: 24px; margin-bottom: 24px;">
             <h1 style="color: white; margin: 0; font-size: 20px; font-weight: 700;">New Project Inquiry</h1>
-            <p style="color: #c7d2fe; margin: 4px 0 0; font-size: 14px;">via NexaStack Technologies contact form</p>
+            <p style="color: #c7d2fe; margin: 4px 0 0; font-size: 14px;">via Quoxova contact form</p>
           </div>
 
           <div style="background: white; border-radius: 8px; padding: 24px; margin-bottom: 16px; border: 1px solid #e2e8f0;">

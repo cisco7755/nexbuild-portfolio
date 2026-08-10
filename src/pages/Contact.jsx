@@ -65,9 +65,9 @@ export default function Contact() {
   }
 
   return (
-    <main className="pt-24">
-      <section className="section-padding">
-        <div className="max-w-7xl mx-auto px-6">
+    <main className="pt-20">
+      <section className="pb-20 md:pb-28">
+        <div className="max-w-[1800px] mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-start">
             {/* Left */}
             <motion.div
@@ -78,12 +78,12 @@ export default function Contact() {
               <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
                 Get in Touch
               </span>
-              <h1 className="font-heading text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 leading-tight">
+              <h1 className="font-heading text-5xl md:text-6xl font-black text-ink-500 dark:text-white mb-6 leading-tight">
                 Let's build something that works.
               </h1>
-              <p className="text-lg text-slate-500 dark:text-slate-400 leading-relaxed mb-10">
+              <p className="text-lg text-ink-300 dark:text-ink-200 leading-relaxed mb-6 md:mb-10">
                 Tell us about your project. We'll respond within one business day with questions, a
-                rough scope estimate, or a meeting request — whichever makes sense for where you are.
+                rough scope estimate, or a meeting request   whichever makes sense for where you are.
               </p>
 
               <div className="space-y-5">
@@ -114,11 +114,11 @@ export default function Contact() {
                         <Icon size={16} className="text-indigo-600 dark:text-indigo-400" />
                       </div>
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-0.5">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-ink-200 dark:text-ink-300 mb-0.5">
                           {item.label}
                         </p>
-                        <p className="text-slate-900 dark:text-white font-medium text-sm">{item.value}</p>
-                        <p className="text-slate-500 dark:text-slate-400 text-xs">{item.sub}</p>
+                        <p className="text-ink-500 dark:text-white font-medium text-sm">{item.value}</p>
+                        <p className="text-ink-300 dark:text-ink-200 text-xs">{item.sub}</p>
                       </div>
                     </div>
                   )
@@ -137,10 +137,10 @@ export default function Contact() {
                   <div className="w-16 h-16 rounded-full bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center mx-auto mb-6">
                     <CheckCircle2 size={28} className="text-indigo-600 dark:text-indigo-400" />
                   </div>
-                  <h2 className="font-heading text-2xl font-bold text-slate-900 dark:text-white mb-3">
+                  <h2 className="font-heading text-2xl font-bold text-ink-500 dark:text-white mb-3">
                     Message received
                   </h2>
-                  <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                  <p className="text-ink-300 dark:text-ink-200 text-sm leading-relaxed">
                     Thanks for reaching out. We'll review your project details and get back to you
                     within one business day.
                   </p>
@@ -155,7 +155,7 @@ export default function Contact() {
                     <div>
                       <label
                         htmlFor="name"
-                        className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5"
+                        className="block text-xs font-semibold text-ink-400 dark:text-ink-100 mb-1.5"
                       >
                         Name *
                       </label>
@@ -170,7 +170,7 @@ export default function Contact() {
                           errors.name
                             ? 'border-red-400 dark:border-red-600'
                             : 'border-slate-200 dark:border-slate-700'
-                        } text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors`}
+                        } text-ink-500 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors`}
                       />
                       {errors.name && (
                         <p className="text-xs text-red-500 mt-1">{errors.name}</p>
@@ -180,7 +180,7 @@ export default function Contact() {
                     <div>
                       <label
                         htmlFor="company"
-                        className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5"
+                        className="block text-xs font-semibold text-ink-400 dark:text-ink-100 mb-1.5"
                       >
                         Company
                       </label>
@@ -191,7 +191,7 @@ export default function Contact() {
                         value={form.company}
                         onChange={handleChange}
                         placeholder="Acme Inc."
-                        className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                        className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-ink-500 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
                       />
                     </div>
                   </div>
@@ -199,7 +199,7 @@ export default function Contact() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5"
+                      className="block text-xs font-semibold text-ink-400 dark:text-ink-100 mb-1.5"
                     >
                       Email *
                     </label>
@@ -214,7 +214,7 @@ export default function Contact() {
                         errors.email
                           ? 'border-red-400 dark:border-red-600'
                           : 'border-slate-200 dark:border-slate-700'
-                      } text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors`}
+                      } text-ink-500 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors`}
                     />
                     {errors.email && (
                       <p className="text-xs text-red-500 mt-1">{errors.email}</p>
@@ -225,7 +225,7 @@ export default function Contact() {
                     <div>
                       <label
                         htmlFor="projectType"
-                        className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5"
+                        className="block text-xs font-semibold text-ink-400 dark:text-ink-100 mb-1.5"
                       >
                         Project Type
                       </label>
@@ -234,7 +234,7 @@ export default function Contact() {
                         name="projectType"
                         value={form.projectType}
                         onChange={handleChange}
-                        className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors appearance-none"
+                        className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-ink-500 dark:text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors appearance-none"
                       >
                         <option value="">Select...</option>
                         {projectTypes.map(t => (
@@ -248,7 +248,7 @@ export default function Contact() {
                     <div>
                       <label
                         htmlFor="budget"
-                        className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5"
+                        className="block text-xs font-semibold text-ink-400 dark:text-ink-100 mb-1.5"
                       >
                         Budget Range
                       </label>
@@ -257,7 +257,7 @@ export default function Contact() {
                         name="budget"
                         value={form.budget}
                         onChange={handleChange}
-                        className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors appearance-none"
+                        className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-ink-500 dark:text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors appearance-none"
                       >
                         <option value="">Select...</option>
                         <option>Under $25K</option>
@@ -272,7 +272,7 @@ export default function Contact() {
                   <div>
                     <label
                       htmlFor="message"
-                      className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5"
+                      className="block text-xs font-semibold text-ink-400 dark:text-ink-100 mb-1.5"
                     >
                       Project Details *
                     </label>
@@ -287,7 +287,7 @@ export default function Contact() {
                         errors.message
                           ? 'border-red-400 dark:border-red-600'
                           : 'border-slate-200 dark:border-slate-700'
-                      } text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors resize-none`}
+                      } text-ink-500 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors resize-none`}
                     />
                     {errors.message && (
                       <p className="text-xs text-red-500 mt-1">{errors.message}</p>
@@ -318,7 +318,7 @@ export default function Contact() {
                     )}
                   </button>
 
-                  <p className="text-xs text-center text-slate-400 dark:text-slate-500">
+                  <p className="text-xs text-center text-ink-200 dark:text-ink-300">
                     We respond within 1 business day. No spam, no sales pressure.
                   </p>
                 </form>

@@ -34,13 +34,13 @@ export default function Navbar({ theme, toggle }) {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-[1800px] mx-auto px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 group">
           <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center group-hover:bg-indigo-700 transition-colors flex-shrink-0">
-            <span className="text-white font-bold text-sm font-heading">N</span>
+            <span className="text-white font-bold text-sm font-heading">Q</span>
           </div>
-          <span className="font-heading font-bold text-lg text-slate-900 dark:text-white tracking-tight">
-            NexaStack Technologies
+          <span className="font-heading font-bold text-lg text-ink-500 dark:text-white tracking-tight">
+            Quoxova
           </span>
         </Link>
 
@@ -52,7 +52,7 @@ export default function Navbar({ theme, toggle }) {
               className={`text-sm font-medium transition-colors ${
                 location.pathname.startsWith(link.to)
                   ? 'text-indigo-600 dark:text-indigo-400'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  : 'text-ink-400 dark:text-ink-200 hover:text-ink-500 dark:hover:text-white'
               }`}
             >
               {link.label}
@@ -74,7 +74,7 @@ export default function Navbar({ theme, toggle }) {
           <ThemeToggle theme={theme} toggle={toggle} />
           <button
             onClick={() => setMenuOpen(v => !v)}
-            className="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            className="p-2 rounded-lg text-ink-400 dark:text-ink-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
             aria-label="Toggle navigation menu"
             aria-expanded={menuOpen}
           >
@@ -92,7 +92,7 @@ export default function Navbar({ theme, toggle }) {
               className={`text-sm font-medium py-2.5 px-3 rounded-lg transition-colors ${
                 location.pathname.startsWith(link.to)
                   ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/50'
-                  : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900'
+                  : 'text-ink-400 dark:text-ink-100 hover:bg-slate-50 dark:hover:bg-slate-900'
               }`}
             >
               {link.label}
