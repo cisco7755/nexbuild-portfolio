@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import ThemeToggle from './ThemeToggle'
+import Logo from './Logo'
 
 const navLinks = [
   { label: 'Projects', to: '/projects' },
@@ -12,71 +13,64 @@ const navLinks = [
 ]
 
 export default function Navbar({ theme, toggle }) {
-  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 16)
-    window.addEventListener('scroll', handler, { passive: true })
-    return () => window.removeEventListener('scroll', handler)
-  }, [])
 
   useEffect(() => {
     setMenuOpen(false)
   }, [location.pathname])
 
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = event => {
+      if (event.key === 'Escape') setMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [menuOpen])
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm'
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-[1800px] mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center group-hover:bg-indigo-700 transition-colors flex-shrink-0">
-            <span className="text-white font-bold text-sm font-heading">Q</span>
-          </div>
-          <span className="font-heading font-bold text-lg text-ink-500 dark:text-white tracking-tight">
-            Quoxova
-          </span>
+    <header className="sticky top-0 z-50 border-b border-line bg-paper/95 dark:border-white/10 dark:bg-night/95">
+      <div className="header-bar flex h-16 items-center justify-between gap-4 lg:h-24">
+        <Link to="/" aria-label="Quoxova" className="shrink-0">
+          <Logo className="h-11 lg:h-[72px]" />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
-          {navLinks.map(link => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`text-sm font-medium transition-colors ${
-                location.pathname.startsWith(link.to)
-                  ? 'text-indigo-600 dark:text-indigo-400'
-                  : 'text-ink-400 dark:text-ink-200 hover:text-ink-500 dark:hover:text-white'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+        <nav className="hidden items-center gap-6 md:flex" aria-label="Main">
+          {navLinks.map(link => {
+            const active = location.pathname.startsWith(link.to)
+            return (
+              <Link
+                key={link.to}
+                to={link.to}
+                aria-current={active ? 'page' : undefined}
+                className={`text-sm ${
+                  active
+                    ? 'text-ink-500 dark:text-mist'
+                    : 'text-ink-300 hover:text-ink-500 dark:text-ink-200 dark:hover:text-mist'
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
         </nav>
 
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden items-center gap-2 md:flex">
           <ThemeToggle theme={theme} toggle={toggle} />
-          <Link
-            to="/contact"
-            className="ml-1 text-sm font-semibold px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
-          >
-            Start a Project
+          <Link to="/contact" className="btn btn-primary">
+            Start a project
           </Link>
         </div>
 
-        <div className="flex md:hidden items-center gap-1">
+        <div className="flex items-center gap-1 md:hidden">
           <ThemeToggle theme={theme} toggle={toggle} />
           <button
-            onClick={() => setMenuOpen(v => !v)}
-            className="p-2 rounded-lg text-ink-400 dark:text-ink-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-            aria-label="Toggle navigation menu"
+            onClick={() => setMenuOpen(open => !open)}
+            className="rounded-md p-2 text-ink-400 hover:bg-black/[0.04] dark:text-ink-200 dark:hover:bg-white/[0.06]"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
           >
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -84,27 +78,29 @@ export default function Navbar({ theme, toggle }) {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 px-6 py-4 flex flex-col gap-1">
-          {navLinks.map(link => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`text-sm font-medium py-2.5 px-3 rounded-lg transition-colors ${
-                location.pathname.startsWith(link.to)
-                  ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/50'
-                  : 'text-ink-400 dark:text-ink-100 hover:bg-slate-50 dark:hover:bg-slate-900'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            to="/contact"
-            className="mt-2 text-sm font-semibold px-4 py-2.5 rounded-lg bg-indigo-600 text-white text-center hover:bg-indigo-700 transition-colors"
-          >
-            Start a Project
+        <nav id="mobile-nav" className="header-bar border-t border-line py-3 dark:border-white/10 md:hidden" aria-label="Mobile">
+          <ul className="flex flex-col">
+            {navLinks.map(link => {
+              const active = location.pathname.startsWith(link.to)
+              return (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    aria-current={active ? 'page' : undefined}
+                    className={`block py-2.5 text-sm ${
+                      active ? 'text-ink-500 dark:text-mist' : 'text-ink-300 dark:text-ink-200'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+          <Link to="/contact" className="btn btn-primary mt-3 w-full">
+            Start a project
           </Link>
-        </div>
+        </nav>
       )}
     </header>
   )

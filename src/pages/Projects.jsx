@@ -1,147 +1,124 @@
 import { useState, useMemo, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { useSearchParams } from 'react-router-dom'
 import { projects } from '../utils/data'
 import ProjectCard from '../components/ProjectCard'
 import ProjectCardSkeleton from '../components/ProjectCardSkeleton'
 import CTASection from '../components/CTASection'
 
-const trustStats = [
-  { value: `${projects.length}`, label: 'Case Studies' },
-  { value: `${[...new Set(projects.map(p => p.industry))].length}`, label: 'Industries' },
-  { value: '6+', label: 'Years Delivering' },
-  { value: '98%', label: 'Client Retention' },
-]
-
 const industries = ['All', 'Health', 'Fintech', 'Logistics', 'SaaS', 'Social', 'E-commerce']
 const serviceTypes = ['All', 'Web Development', 'Mobile Apps', 'Backend Systems']
 
+function FilterGroup({ label, options, value, onChange }) {
+  return (
+    <div>
+      <p id={`${label}-label`} className="eyebrow mb-2">
+        {label}
+      </p>
+      <div className="flex flex-wrap gap-1.5" role="group" aria-labelledby={`${label}-label`}>
+        {options.map(option => {
+          const selected = value === option
+          return (
+            <button
+              key={option}
+              type="button"
+              aria-pressed={selected}
+              onClick={() => onChange(option)}
+              className={`rounded-md px-2.5 py-1 text-sm ${
+                selected
+                  ? 'bg-ink-500 text-paper dark:bg-mist dark:text-ink-500'
+                  : 'text-ink-300 hover:text-ink-500 dark:text-ink-200 dark:hover:text-mist'
+              }`}
+            >
+              {option}
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 export default function Projects() {
-  const [industryFilter, setIndustryFilter] = useState('All')
+  const [searchParams] = useSearchParams()
+  const initialIndustry = industries.includes(searchParams.get('industry'))
+    ? searchParams.get('industry')
+    : 'All'
+  const [industryFilter, setIndustryFilter] = useState(initialIndustry)
   const [serviceFilter, setServiceFilter] = useState('All')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 600)
-    return () => clearTimeout(t)
+    const timer = setTimeout(() => setLoading(false), 400)
+    return () => clearTimeout(timer)
   }, [])
 
+  useEffect(() => {
+    const next = searchParams.get('industry')
+    if (industries.includes(next)) setIndustryFilter(next)
+  }, [searchParams])
+
   const filtered = useMemo(() => {
-    return projects.filter(p => {
-      const byIndustry = industryFilter === 'All' || p.industry === industryFilter
-      const byService = serviceFilter === 'All' || p.service === serviceFilter
+    return projects.filter(project => {
+      const byIndustry = industryFilter === 'All' || project.industry === industryFilter
+      const byService = serviceFilter === 'All' || project.service === serviceFilter
       return byIndustry && byService
     })
   }, [industryFilter, serviceFilter])
 
   return (
-    <main className="pt-20">
-      <section className="pt-0 pb-0">
-        <div className="max-w-[1800px] mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl mb-8 md:mb-12"
-          >
-            <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
-              Case Studies
-            </span>
-            <h1 className="font-heading text-5xl md:text-6xl font-black text-ink-500 dark:text-white mb-4 leading-tight">
-              Projects that moved the needle
-            </h1>
-            <p className="text-lg text-ink-300 dark:text-ink-200 leading-relaxed">
-              Every project here includes the actual problem, what we built, and the measurable
-              outcome. No vague descriptions.
-            </p>
-          </motion.div>
+    <main>
+      <section className="border-b border-line dark:border-white/10">
+        <div className="page py-14 md:py-20">
+          <p className="eyebrow">Case studies</p>
+          <h1 className="page-title mt-3 max-w-2xl">Projects that moved the needle</h1>
+          <p className="lede mt-4 max-w-xl">
+            Every project includes the problem, what we built, and the measurable outcome.
+          </p>
 
-          {/* Trust strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="grid grid-cols-2 sm:flex sm:flex-wrap gap-4 mb-8 md:gap-6 md:mb-12 p-4 md:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800"
-          >
-            {trustStats.map(s => (
-              <div key={s.label} className="flex items-center gap-3">
-                <span className="font-heading font-black text-2xl text-indigo-600 dark:text-indigo-400">{s.value}</span>
-                <span className="text-sm text-ink-300 dark:text-ink-200 font-medium">{s.label}</span>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* Filters */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-wrap gap-4 mb-8 md:gap-6 md:mb-12"
-          >
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-ink-200 dark:text-ink-300 mb-2">
-                Industry
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {industries.map(f => (
-                  <button
-                    key={f}
-                    onClick={() => setIndustryFilter(f)}
-                    className={`text-sm px-4 py-1.5 rounded-lg font-medium transition-colors ${
-                      industryFilter === f
-                        ? 'bg-indigo-600 text-white'
-                        : 'bg-slate-100 dark:bg-slate-800 text-ink-400 dark:text-ink-200 hover:bg-slate-200 dark:hover:bg-slate-700'
-                    }`}
-                  >
-                    {f}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-ink-200 dark:text-ink-300 mb-2">
-                Service
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {serviceTypes.map(f => (
-                  <button
-                    key={f}
-                    onClick={() => setServiceFilter(f)}
-                    className={`text-sm px-4 py-1.5 rounded-lg font-medium transition-colors ${
-                      serviceFilter === f
-                        ? 'bg-indigo-600 text-white'
-                        : 'bg-slate-100 dark:bg-slate-800 text-ink-400 dark:text-ink-200 hover:bg-slate-200 dark:hover:bg-slate-700'
-                    }`}
-                  >
-                    {f}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+          <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:gap-10">
+            <FilterGroup
+              label="Industry"
+              options={industries}
+              value={industryFilter}
+              onChange={setIndustryFilter}
+            />
+            <FilterGroup
+              label="Service"
+              options={serviceTypes}
+              value={serviceFilter}
+              onChange={setServiceFilter}
+            />
+          </div>
         </div>
       </section>
 
       <section className="section-padding pt-0">
-        <div className="max-w-[1800px] mx-auto px-6">
+        <div className="page">
+          <p className="sr-only" aria-live="polite">
+            {loading ? 'Loading projects' : `${filtered.length} projects`}
+          </p>
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Array.from({ length: 6 }).map((_, i) => <ProjectCardSkeleton key={i} />)}
+            <div className="border-t border-line dark:border-white/10">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <ProjectCardSkeleton key={index} />
+              ))}
             </div>
           ) : filtered.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="border-t border-line dark:border-white/10">
               {filtered.map(project => (
                 <ProjectCard key={project.id} project={project} />
               ))}
             </div>
           ) : (
-            <div className="text-center py-20">
-              <p className="text-ink-200 dark:text-ink-300 text-lg">
-                No projects match those filters.
-              </p>
+            <div className="border-t border-line py-16 dark:border-white/10">
+              <p className="text-ink-400 dark:text-ink-200">No projects match those filters.</p>
               <button
-                onClick={() => { setIndustryFilter('All'); setServiceFilter('All') }}
-                className="mt-4 text-sm text-indigo-600 dark:text-indigo-400 font-medium hover:underline"
+                type="button"
+                onClick={() => {
+                  setIndustryFilter('All')
+                  setServiceFilter('All')
+                }}
+                className="mt-3 text-sm font-medium text-ink-500 underline-offset-4 hover:underline dark:text-mist"
               >
                 Clear filters
               </button>

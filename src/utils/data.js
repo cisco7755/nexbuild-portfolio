@@ -319,6 +319,29 @@ export const projects = [
   },
 ]
 
+const projectPages = {
+  'whistler-mobile': ['Communities', 'Moments', 'Events', 'Messages', 'Profile'],
+  'whistler-admin': ['Overview', 'Communities', 'Users', 'Moderation', 'Activity'],
+  'beta-buy': ['Marketplace', 'Listing', 'Checkout', 'Seller', 'Payouts'],
+  clientshot: ['Surveys', 'Analytics', 'Messages', 'Reports'],
+  'clientshot-admin': ['Accounts', 'Facilities', 'Branches', 'Activity'],
+  'healthtrack-pro': ['Vitals', 'Alerts', 'Patients', 'Timeline'],
+  'clearpay-dashboard': ['Volume', 'Transactions', 'Insights', 'Alerts'],
+  'fleetops-manager': ['Fleet', 'Routes', 'Deliveries', 'Fuel'],
+  talenthive: ['Roles', 'Candidates', 'Pipeline', 'Offers'],
+  'medisync  emr': ['Records', 'Encounters', 'Billing', 'Search'],
+  'tradeflow-analytics': ['Markets', 'Positions', 'Risk', 'Backtests'],
+}
+
+export function projectScreens(project) {
+  if (Array.isArray(project.screens) && project.screens.length) return project.screens
+  const pages = projectPages[project.id] || ['Overview']
+  return pages.map((label, index) => ({
+    label,
+    src: `https://picsum.photos/seed/${encodeURIComponent(project.id)}-${index}/1200/800`,
+  }))
+}
+
 export const services = [
   {
     id: 'web-development',

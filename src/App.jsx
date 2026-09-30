@@ -30,11 +30,14 @@ export default function App() {
   const location = useLocation()
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-slate-950 transition-colors duration-300">
+    <div className="flex min-h-screen flex-col bg-paper transition-colors duration-200 dark:bg-night">
+      <a href="#content" className="skip-link">
+        Skip to content
+      </a>
       <ScrollToTop />
       <ScrollProgress />
       <Navbar theme={theme} toggle={toggle} />
-      <div className="flex-1">
+      <div id="content" className="flex-1">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<PageTransition><Home /></PageTransition>} />

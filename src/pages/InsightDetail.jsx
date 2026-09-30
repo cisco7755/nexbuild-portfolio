@@ -1,6 +1,4 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, ArrowRight } from 'lucide-react'
 import CTASection from '../components/CTASection'
 
 const articles = [
@@ -373,12 +371,6 @@ const articles = [
   },
 ]
 
-const tagColors = {
-  Process: 'bg-indigo-50 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400',
-  Engineering: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400',
-  Clients: 'bg-orange-50 text-orange-700 dark:bg-orange-950/50 dark:text-orange-400',
-  Business: 'bg-violet-50 text-violet-700 dark:bg-violet-950/50 dark:text-violet-400',
-}
 
 function renderBody(blocks) {
   return blocks.map((block, i) => {
@@ -391,14 +383,14 @@ function renderBody(blocks) {
     }
     if (block.type === 'h2') {
       return (
-        <h2 key={i} className="font-heading text-xl md:text-2xl font-bold text-ink-500 dark:text-white mt-10 mb-4">
+        <h2 key={i} className="font-heading text-xl md:text-2xl font-semibold text-ink-500 dark:text-mist mt-10 mb-4">
           {block.text}
         </h2>
       )
     }
     if (block.type === 'h3') {
       return (
-        <h3 key={i} className="font-heading text-lg font-bold text-ink-500 dark:text-white mt-6 mb-3">
+        <h3 key={i} className="font-heading text-lg font-semibold text-ink-500 dark:text-mist mt-6 mb-3">
           {block.text}
         </h3>
       )
@@ -407,8 +399,7 @@ function renderBody(blocks) {
       return (
         <ul key={i} className="space-y-3 mb-6 pl-1">
           {block.items.map((item, j) => (
-            <li key={j} className="flex gap-3 text-ink-400 dark:text-ink-100 text-base leading-relaxed">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0 mt-2.5" />
+            <li key={j} className="text-ink-400 dark:text-ink-100 text-base leading-relaxed pl-4 border-l border-line dark:border-white/10">
               {item}
             </li>
           ))}
@@ -430,93 +421,58 @@ export default function InsightDetail() {
   const prevArticle = currentIndex > 0 ? articles[currentIndex - 1] : null
 
   return (
-    <main className="pt-20">
-      {/* Hero */}
-      <section className="pt-0 pb-0">
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+    <main>
+      <article>
+        <header className="border-b border-line dark:border-white/10">
+          <div className="page py-12 md:py-16">
             <Link
               to="/insights"
-              className="inline-flex items-center gap-2 text-sm text-ink-300 dark:text-ink-200 hover:text-ink-500 dark:hover:text-white transition-colors mb-8"
+              className="text-sm text-ink-300 underline-offset-4 hover:text-ink-500 hover:underline dark:text-ink-200 dark:hover:text-mist"
             >
-              <ArrowLeft size={14} /> Back to Insights
+              All insights
             </Link>
-
-            <div className="flex items-center gap-3 mb-5">
-              <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${tagColors[article.tag]}`}>
-                {article.tag}
-              </span>
-              <span className="flex items-center gap-1 text-xs text-ink-200 dark:text-ink-300">
-                <Clock size={12} /> {article.readTime} read
-              </span>
-            </div>
-
-            <h1 className="font-heading text-3xl md:text-5xl font-black text-ink-500 dark:text-white leading-tight mb-6">
-              {article.title}
-            </h1>
-
-            <p className="text-lg text-ink-300 dark:text-ink-200 leading-relaxed mb-6 md:mb-10 border-b border-slate-200 dark:border-slate-800 pb-10">
-              {article.excerpt}
+            <p className="eyebrow mt-8">
+              {article.tag}
+              <span aria-hidden="true"> · </span>
+              {article.readTime} read
             </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Body */}
-      <section className="section-padding pt-0">
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-          >
-            {renderBody(article.body)}
-          </motion.div>
-
-          {/* Author block */}
-          <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex items-center gap-4">
-            <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${article.color} flex items-center justify-center flex-shrink-0`}>
-              <span className="text-white font-bold text-sm font-heading">N</span>
-            </div>
-            <div>
-              <p className="font-semibold text-ink-500 dark:text-white text-sm">Quoxova Engineering</p>
-              <p className="text-xs text-ink-300 dark:text-ink-200">Lagos, Nigeria · hello@quoxova.io</p>
-            </div>
+            <h1 className="page-title mt-3">{article.title}</h1>
+            <p className="lede mt-5">{article.excerpt}</p>
           </div>
+        </header>
 
-          {/* Prev / Next */}
+        <div className="page py-12 md:py-16">
+          {renderBody(article.body)}
+
+          <p className="mt-12 border-t border-line pt-6 text-sm text-ink-300 dark:border-white/10 dark:text-ink-200">
+            Quoxova Engineering
+            {import.meta.env.VITE_COMPANY_LOCATION ? ` · ${import.meta.env.VITE_COMPANY_LOCATION}` : ''}
+          </p>
+
           {(prevArticle || nextArticle) && (
-            <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex justify-between gap-4">
+            <nav aria-label="More articles" className="mt-10 grid gap-6 border-t border-line pt-6 dark:border-white/10 sm:grid-cols-2">
               {prevArticle ? (
-                <Link to={`/insights/${prevArticle.slug}`} className="group flex items-center gap-3 text-left max-w-xs">
-                  <ArrowLeft size={16} className="text-ink-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0" />
-                  <div>
-                    <p className="text-xs text-ink-200 mb-0.5">Previous</p>
-                    <p className="text-sm font-semibold text-ink-500 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
-                      {prevArticle.title}
-                    </p>
-                  </div>
+                <Link to={`/insights/${prevArticle.slug}`} className="group">
+                  <p className="text-sm text-ink-200">Previous</p>
+                  <p className="mt-1 text-sm font-medium leading-snug text-ink-500 group-hover:underline group-hover:underline-offset-4 dark:text-mist">
+                    {prevArticle.title}
+                  </p>
                 </Link>
-              ) : <div />}
+              ) : (
+                <div />
+              )}
               {nextArticle && (
-                <Link to={`/insights/${nextArticle.slug}`} className="group flex items-center gap-3 text-right max-w-xs">
-                  <div>
-                    <p className="text-xs text-ink-200 mb-0.5">Next</p>
-                    <p className="text-sm font-semibold text-ink-500 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
-                      {nextArticle.title}
-                    </p>
-                  </div>
-                  <ArrowRight size={16} className="text-ink-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0" />
+                <Link to={`/insights/${nextArticle.slug}`} className="group sm:text-right">
+                  <p className="text-sm text-ink-200">Next</p>
+                  <p className="mt-1 text-sm font-medium leading-snug text-ink-500 group-hover:underline group-hover:underline-offset-4 dark:text-mist">
+                    {nextArticle.title}
+                  </p>
                 </Link>
               )}
-            </div>
+            </nav>
           )}
         </div>
-      </section>
+      </article>
 
       <CTASection />
     </main>

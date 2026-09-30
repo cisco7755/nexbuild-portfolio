@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Github, Linkedin, Twitter, ArrowRight } from 'lucide-react'
+import { Github, Linkedin, Twitter } from 'lucide-react'
+import Logo from './Logo'
 
 const footerLinks = [
   {
@@ -33,15 +34,18 @@ const footerLinks = [
   },
 ]
 
-function NewsletterStrip() {
+function NewsletterForm() {
   const [email, setEmail] = useState('')
   const [done, setDone] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const handleSubmit = async e => {
-    e.preventDefault()
-    if (!email.includes('@')) return
+  const handleSubmit = async event => {
+    event.preventDefault()
+    if (!email.includes('@')) {
+      setError('Enter a valid email address.')
+      return
+    }
     setLoading(true)
     setError('')
     try {
@@ -60,65 +64,75 @@ function NewsletterStrip() {
     }
   }
 
+  if (done) {
+    return (
+      <p className="text-sm text-ink-500 dark:text-mist" role="status">
+        You're subscribed. Check your inbox.
+      </p>
+    )
+  }
+
   return (
-    <div className="bg-indigo-600 dark:bg-indigo-700">
-      <div className="max-w-[1800px] mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
-          <p className="font-heading font-bold text-white text-lg">Stay in the loop.</p>
-          <p className="text-indigo-200 text-sm">Practical engineering & product writing. No spam, ever.</p>
-        </div>
-        {done ? (
-          <p className="text-white font-semibold text-sm">You're in   check your inbox.</p>
-        ) : (
-          <div className="w-full md:w-auto">
-            <form onSubmit={handleSubmit} className="flex gap-2 w-full md:w-auto">
-              <input
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder="your@email.com"
-                className="flex-1 md:w-64 px-4 py-2.5 rounded-xl text-sm bg-white/10 text-white placeholder-indigo-300 border border-white/20 focus:outline-none focus:border-white transition-colors"
-              />
-              <button
-                type="submit"
-                disabled={loading}
-                className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white text-indigo-600 font-semibold text-sm hover:bg-indigo-50 transition-colors flex-shrink-0 disabled:opacity-60"
-              >
-                {loading ? 'Sending…' : <><span>Subscribe</span> <ArrowRight size={14} /></>}
-              </button>
-            </form>
-            {error && <p className="text-red-300 text-xs mt-1.5">{error}</p>}
-          </div>
-        )}
+    <form onSubmit={handleSubmit} className="w-full max-w-md" noValidate>
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <label htmlFor="newsletter-email" className="sr-only">
+          Email address
+        </label>
+        <input
+          id="newsletter-email"
+          type="email"
+          value={email}
+          onChange={event => setEmail(event.target.value)}
+          placeholder="you@company.com"
+          autoComplete="email"
+          className="field sm:flex-1"
+          aria-invalid={error ? 'true' : undefined}
+          aria-describedby={error ? 'newsletter-error' : undefined}
+        />
+        <button type="submit" disabled={loading} className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-60">
+          {loading ? 'Sending…' : 'Subscribe'}
+        </button>
       </div>
-    </div>
+      {error && (
+        <p id="newsletter-error" className="mt-2 text-sm text-red-700 dark:text-red-300" role="alert">
+          {error}
+        </p>
+      )}
+    </form>
   )
 }
 
 export default function Footer() {
   return (
-    <>
-    <NewsletterStrip />
-    <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
-      <div className="max-w-[1800px] mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          <div className="md:col-span-1">
-            <Link to="/" className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-sm font-heading">Q</span>
-              </div>
-              <span className="font-heading font-bold text-lg text-ink-500 dark:text-white">Quoxova</span>
+    <footer className="border-t border-line bg-paper dark:border-white/10 dark:bg-night">
+      <div className="page flex flex-col gap-6 border-b border-line py-10 dark:border-white/10 md:flex-row md:items-end md:justify-between">
+        <div className="max-w-sm">
+          <h2 className="font-heading text-xl font-semibold text-ink-500 dark:text-mist">
+            Notes from the studio
+          </h2>
+          <p className="mt-1 text-sm text-ink-300 dark:text-ink-200">
+            Practical writing on engineering and client work. No newsletter filler.
+          </p>
+        </div>
+        <NewsletterForm />
+      </div>
+
+      <div className="page py-12">
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
+          <div className="col-span-2 md:col-span-1">
+            <Link to="/" aria-label="Quoxova" className="inline-flex">
+              <Logo className="h-14 lg:h-20" />
             </Link>
-            <p className="text-ink-300 dark:text-ink-200 text-sm leading-relaxed mb-6">
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-300 dark:text-ink-200">
               We design and build software that helps businesses launch faster and scale without friction.
             </p>
-            <div className="flex items-center gap-3">
+            <div className="mt-4 flex items-center gap-1">
               <a
                 href={import.meta.env.VITE_GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="p-2 rounded-lg text-ink-200 hover:text-ink-400 dark:hover:text-ink-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="rounded-md p-2 text-ink-300 hover:text-ink-500 dark:text-ink-200 dark:hover:text-mist"
               >
                 <Github size={16} />
               </a>
@@ -127,7 +141,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="p-2 rounded-lg text-ink-200 hover:text-ink-400 dark:hover:text-ink-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="rounded-md p-2 text-ink-300 hover:text-ink-500 dark:text-ink-200 dark:hover:text-mist"
               >
                 <Linkedin size={16} />
               </a>
@@ -135,8 +149,8 @@ export default function Footer() {
                 href={import.meta.env.VITE_TWITTER_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Twitter / X"
-                className="p-2 rounded-lg text-ink-200 hover:text-ink-400 dark:hover:text-ink-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                aria-label="Twitter"
+                className="rounded-md p-2 text-ink-300 hover:text-ink-500 dark:text-ink-200 dark:hover:text-mist"
               >
                 <Twitter size={16} />
               </a>
@@ -145,15 +159,15 @@ export default function Footer() {
 
           {footerLinks.map(group => (
             <div key={group.title}>
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-ink-200 dark:text-ink-300 mb-4">
+              <h3 className="text-[11px] font-medium uppercase tracking-[0.16em] text-ink-200">
                 {group.title}
-              </h4>
-              <ul className="space-y-3">
+              </h3>
+              <ul className="mt-3 space-y-2">
                 {group.links.map(link => (
                   <li key={link.label}>
                     <Link
                       to={link.to}
-                      className="text-sm text-ink-400 dark:text-ink-200 hover:text-ink-500 dark:hover:text-white transition-colors"
+                      className="text-sm text-ink-400 hover:text-ink-500 dark:text-ink-200 dark:hover:text-mist"
                     >
                       {link.label}
                     </Link>
@@ -164,16 +178,14 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-ink-200 dark:text-ink-300">
-            &copy; {new Date().getFullYear()} Quoxova. All rights reserved.
-          </p>
-          <p className="text-sm text-ink-200 dark:text-ink-300">
-            {import.meta.env.VITE_COMPANY_LOCATION} · {import.meta.env.VITE_CONTACT_EMAIL}
+        <div className="mt-12 flex flex-col gap-2 border-t border-line pt-6 text-sm text-ink-200 dark:border-white/10 dark:text-ink-200 sm:flex-row sm:items-center sm:justify-between">
+          <p>&copy; {new Date().getFullYear()} Quoxova</p>
+          <p>
+            {import.meta.env.VITE_COMPANY_LOCATION}
+            {import.meta.env.VITE_CONTACT_EMAIL ? ` · ${import.meta.env.VITE_CONTACT_EMAIL}` : ''}
           </p>
         </div>
       </div>
     </footer>
-    </>
   )
 }

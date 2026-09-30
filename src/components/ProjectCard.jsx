@@ -1,49 +1,56 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { projectScreens } from '../utils/data'
+import ScreenCarousel from './ScreenCarousel'
 
-export default function ProjectCard({ project }) {
-  const { id, title, industry, category, shortDescription, image } = project
+export default function ProjectCard({ project, card = false }) {
+  const { id, title, industry, category, shortDescription, duration } = project
+  const screens = card ? projectScreens(project) : []
+
+  if (!card) {
+    return (
+      <article className="border-b border-line py-6 dark:border-white/10">
+        <Link to={`/projects/${id}`} className="group grid gap-2 md:grid-cols-12 md:items-baseline md:gap-6">
+          <p className="text-sm text-ink-300 dark:text-ink-200 md:col-span-3">
+            {industry}
+            <span aria-hidden="true"> · </span>
+            {category}
+          </p>
+          <div className="md:col-span-7">
+            <h3 className="font-heading text-lg font-semibold leading-snug text-ink-500 group-hover:underline group-hover:decoration-line group-hover:underline-offset-4 dark:text-mist">
+              {title}
+            </h3>
+            <p className="mt-1.5 text-sm leading-relaxed text-ink-300 dark:text-ink-200">{shortDescription}</p>
+          </div>
+          <p className="text-sm text-ink-200 md:col-span-2 md:text-right">{duration || 'Case study'}</p>
+        </Link>
+      </article>
+    )
+  }
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="flex flex-col rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900"
-    >
-      <div className="aspect-[8/3] bg-slate-100 dark:bg-slate-800 overflow-hidden">
-        {image && (
-          <img src={image} alt={title} className="w-full h-full object-cover" loading="lazy" />
-        )}
-      </div>
-
-      <div className="flex flex-col flex-1 p-6">
-        <div className="flex flex-wrap items-center gap-2 mb-4">
-          <span className="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-ink-400 dark:text-ink-200">
-            {industry}
-          </span>
-          <span className="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-ink-400 dark:text-ink-200">
-            {category}
-          </span>
-        </div>
-
-        <h3 className="font-heading text-lg font-bold text-ink-500 dark:text-white mb-1.5 leading-snug">
+    <article className="card">
+      {screens.length > 0 ? (
+        <ScreenCarousel
+          screens={screens}
+          title={title}
+          frameClassName="aspect-[3/2] w-full object-cover"
+          controlsClassName="border-b border-line px-4 py-2 dark:border-white/10"
+        />
+      ) : null}
+      <Link to={`/projects/${id}`} className="group flex flex-1 flex-col p-4">
+        <p className="text-sm text-ink-300 dark:text-ink-200">
+          {industry}
+          <span aria-hidden="true"> · </span>
+          {category}
+        </p>
+        <h3 className="mt-1.5 font-heading text-lg font-semibold leading-snug text-ink-500 group-hover:underline group-hover:decoration-line group-hover:underline-offset-4 dark:text-mist">
           {title}
         </h3>
-
-        <p className="text-ink-300 dark:text-ink-200 text-sm leading-relaxed mb-4 line-clamp-2">
+        <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-ink-300 dark:text-ink-200">
           {shortDescription}
         </p>
-
-        <Link
-          to={`/projects/${id}`}
-          className="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline w-fit"
-        >
-          View Case Study <ArrowRight size={14} />
-        </Link>
-      </div>
-    </motion.article>
+        <p className="mt-auto pt-3 text-sm text-ink-200">{duration || 'Case study'}</p>
+      </Link>
+    </article>
   )
 }

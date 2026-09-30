@@ -1,6 +1,5 @@
-import { useState } from 'react'
-import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { useInView } from 'framer-motion'
 import { useCountUp } from '../hooks/useCountUp'
 
 function StatValue({ raw }) {
@@ -8,7 +7,7 @@ function StatValue({ raw }) {
   const suffix = raw.match(/[^0-9.]+$/)?.[0] ?? ''
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-50px' })
-  const count = useCountUp(raw, 1800, inView)
+  const count = useCountUp(raw, 1200, inView)
 
   return (
     <span ref={ref}>
@@ -17,21 +16,13 @@ function StatValue({ raw }) {
   )
 }
 
-export default function AnimatedStat({ stat, delay = 0 }) {
+export default function AnimatedStat({ stat }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay }}
-      className="text-center p-4 md:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"
-    >
-      <div className="font-heading text-4xl font-black text-ink-500 dark:text-white mb-1">
+    <div>
+      <div className="font-heading text-3xl font-semibold tracking-tight text-ink-500 dark:text-mist">
         <StatValue raw={stat.value} />
       </div>
-      <div className="text-sm text-ink-300 dark:text-ink-200 font-medium">
-        {stat.label}
-      </div>
-    </motion.div>
+      <div className="mt-1 text-sm text-ink-300 dark:text-ink-200">{stat.label}</div>
+    </div>
   )
 }

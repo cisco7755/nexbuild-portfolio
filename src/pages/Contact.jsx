@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Mail, MapPin, Clock, CheckCircle2, ArrowRight } from 'lucide-react'
+import { CheckCircle2 } from 'lucide-react'
 
 const projectTypes = [
   'Web Application',
@@ -10,6 +9,24 @@ const projectTypes = [
   'Full Product Build',
   'Other',
 ]
+
+const budgets = ['Under $25K', '$25K – $75K', '$75K – $150K', '$150K+', 'Not sure yet']
+
+function Field({ id, label, error, children }) {
+  return (
+    <div>
+      <label htmlFor={id} className="mb-1.5 block text-sm text-ink-400 dark:text-ink-200">
+        {label}
+      </label>
+      {children}
+      {error && (
+        <p id={`${id}-error`} className="mt-1 text-sm text-red-700 dark:text-red-300" role="alert">
+          {error}
+        </p>
+      )}
+    </div>
+  )
+}
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -26,18 +43,18 @@ export default function Contact() {
   const [errors, setErrors] = useState({})
 
   const validate = () => {
-    const errs = {}
-    if (!form.name.trim()) errs.name = 'Name is required'
-    if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) errs.email = 'Valid email is required'
-    if (!form.message.trim()) errs.message = 'Tell us about your project'
-    return errs
+    const next = {}
+    if (!form.name.trim()) next.name = 'Name is required'
+    if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) next.email = 'A valid email is required'
+    if (!form.message.trim()) next.message = 'Tell us about the project'
+    return next
   }
 
-  const handleSubmit = async e => {
-    e.preventDefault()
-    const errs = validate()
-    if (Object.keys(errs).length > 0) {
-      setErrors(errs)
+  const handleSubmit = async event => {
+    event.preventDefault()
+    const next = validate()
+    if (Object.keys(next).length > 0) {
+      setErrors(next)
       return
     }
     setLoading(true)
@@ -58,272 +75,165 @@ export default function Contact() {
     }
   }
 
-  const handleChange = e => {
-    const { name, value } = e.target
-    setForm(f => ({ ...f, [name]: value }))
-    if (errors[name]) setErrors(er => ({ ...er, [name]: undefined }))
+  const handleChange = event => {
+    const { name, value } = event.target
+    setForm(current => ({ ...current, [name]: value }))
+    if (errors[name]) setErrors(current => ({ ...current, [name]: undefined }))
   }
 
+  const inputClass = name => `field ${errors[name] ? 'field-error' : ''}`
+
   return (
-    <main className="pt-20">
-      <section className="pb-20 md:pb-28">
-        <div className="max-w-[1800px] mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-16 items-start">
-            {/* Left */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
-                Get in Touch
-              </span>
-              <h1 className="font-heading text-5xl md:text-6xl font-black text-ink-500 dark:text-white mb-6 leading-tight">
-                Let's build something that works.
-              </h1>
-              <p className="text-lg text-ink-300 dark:text-ink-200 leading-relaxed mb-6 md:mb-10">
-                Tell us about your project. We'll respond within one business day with questions, a
-                rough scope estimate, or a meeting request   whichever makes sense for where you are.
-              </p>
+    <main>
+      <section className="section-padding">
+        <div className="page grid items-start gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <p className="eyebrow">Contact</p>
+            <h1 className="page-title mt-3">Let's build something that works.</h1>
+            <p className="lede mt-4">
+              Tell us about your project. We'll respond within one business day with questions, a rough scope, or a meeting request.
+            </p>
 
-              <div className="space-y-5">
-                {[
-                  {
-                    icon: Mail,
-                    label: 'Email',
-                    value: import.meta.env.VITE_CONTACT_EMAIL,
-                    sub: 'We respond within 1 business day',
-                  },
-                  {
-                    icon: MapPin,
-                    label: 'Location',
-                    value: import.meta.env.VITE_COMPANY_LOCATION,
-                    sub: 'Serving clients across Africa & globally',
-                  },
-                  {
-                    icon: Clock,
-                    label: 'Availability',
-                    value: 'Currently accepting projects',
-                    sub: 'Next intake: Q2 2026',
-                  },
-                ].map(item => {
-                  const Icon = item.icon
-                  return (
-                    <div key={item.label} className="flex gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center flex-shrink-0">
-                        <Icon size={16} className="text-indigo-600 dark:text-indigo-400" />
-                      </div>
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-wider text-ink-200 dark:text-ink-300 mb-0.5">
-                          {item.label}
-                        </p>
-                        <p className="text-ink-500 dark:text-white font-medium text-sm">{item.value}</p>
-                        <p className="text-ink-300 dark:text-ink-200 text-xs">{item.sub}</p>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </motion.div>
-
-            {/* Form */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-            >
-              {submitted ? (
-                <div className="p-10 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center">
-                  <div className="w-16 h-16 rounded-full bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center mx-auto mb-6">
-                    <CheckCircle2 size={28} className="text-indigo-600 dark:text-indigo-400" />
-                  </div>
-                  <h2 className="font-heading text-2xl font-bold text-ink-500 dark:text-white mb-3">
-                    Message received
-                  </h2>
-                  <p className="text-ink-300 dark:text-ink-200 text-sm leading-relaxed">
-                    Thanks for reaching out. We'll review your project details and get back to you
-                    within one business day.
-                  </p>
+            <dl className="mt-10 space-y-6 border-t border-line pt-6 dark:border-white/10">
+              {import.meta.env.VITE_CONTACT_EMAIL && (
+                <div>
+                  <dt className="text-sm text-ink-200">Email</dt>
+                  <dd className="mt-1 text-ink-500 dark:text-mist">
+                    <a href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`} className="underline-offset-4 hover:underline">
+                      {import.meta.env.VITE_CONTACT_EMAIL}
+                    </a>
+                  </dd>
+                  <dd className="text-sm text-ink-300 dark:text-ink-200">We respond within 1 business day</dd>
                 </div>
-              ) : (
-                <form
-                  onSubmit={handleSubmit}
-                  noValidate
-                  className="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-5"
-                >
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label
-                        htmlFor="name"
-                        className="block text-xs font-semibold text-ink-400 dark:text-ink-100 mb-1.5"
-                      >
-                        Name *
-                      </label>
-                      <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        value={form.name}
-                        onChange={handleChange}
-                        placeholder="Alex Johnson"
-                        className={`w-full px-4 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800 border ${
-                          errors.name
-                            ? 'border-red-400 dark:border-red-600'
-                            : 'border-slate-200 dark:border-slate-700'
-                        } text-ink-500 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors`}
-                      />
-                      {errors.name && (
-                        <p className="text-xs text-red-500 mt-1">{errors.name}</p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="company"
-                        className="block text-xs font-semibold text-ink-400 dark:text-ink-100 mb-1.5"
-                      >
-                        Company
-                      </label>
-                      <input
-                        id="company"
-                        name="company"
-                        type="text"
-                        value={form.company}
-                        onChange={handleChange}
-                        placeholder="Acme Inc."
-                        className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-ink-500 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-xs font-semibold text-ink-400 dark:text-ink-100 mb-1.5"
-                    >
-                      Email *
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={form.email}
-                      onChange={handleChange}
-                      placeholder="alex@company.com"
-                      className={`w-full px-4 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800 border ${
-                        errors.email
-                          ? 'border-red-400 dark:border-red-600'
-                          : 'border-slate-200 dark:border-slate-700'
-                      } text-ink-500 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors`}
-                    />
-                    {errors.email && (
-                      <p className="text-xs text-red-500 mt-1">{errors.email}</p>
-                    )}
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label
-                        htmlFor="projectType"
-                        className="block text-xs font-semibold text-ink-400 dark:text-ink-100 mb-1.5"
-                      >
-                        Project Type
-                      </label>
-                      <select
-                        id="projectType"
-                        name="projectType"
-                        value={form.projectType}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-ink-500 dark:text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors appearance-none"
-                      >
-                        <option value="">Select...</option>
-                        {projectTypes.map(t => (
-                          <option key={t} value={t}>
-                            {t}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="budget"
-                        className="block text-xs font-semibold text-ink-400 dark:text-ink-100 mb-1.5"
-                      >
-                        Budget Range
-                      </label>
-                      <select
-                        id="budget"
-                        name="budget"
-                        value={form.budget}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-ink-500 dark:text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors appearance-none"
-                      >
-                        <option value="">Select...</option>
-                        <option>Under $25K</option>
-                        <option>$25K – $75K</option>
-                        <option>$75K – $150K</option>
-                        <option>$150K+</option>
-                        <option>Not sure yet</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-xs font-semibold text-ink-400 dark:text-ink-100 mb-1.5"
-                    >
-                      Project Details *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={5}
-                      value={form.message}
-                      onChange={handleChange}
-                      placeholder="Describe the problem you're trying to solve, what you've tried, and what success looks like..."
-                      className={`w-full px-4 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800 border ${
-                        errors.message
-                          ? 'border-red-400 dark:border-red-600'
-                          : 'border-slate-200 dark:border-slate-700'
-                      } text-ink-500 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors resize-none`}
-                    />
-                    {errors.message && (
-                      <p className="text-xs text-red-500 mt-1">{errors.message}</p>
-                    )}
-                  </div>
-
-                  {serverError && (
-                    <p className="text-sm text-red-500 text-center py-2 px-3 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900">
-                      {serverError}
-                    </p>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition-all hover:shadow-lg hover:shadow-indigo-500/25 text-sm disabled:opacity-60 disabled:cursor-not-allowed"
-                  >
-                    {loading ? (
-                      <>
-                        <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-                        </svg>
-                        Sending...
-                      </>
-                    ) : (
-                      <>Send Message <ArrowRight size={16} /></>
-                    )}
-                  </button>
-
-                  <p className="text-xs text-center text-ink-200 dark:text-ink-300">
-                    We respond within 1 business day. No spam, no sales pressure.
-                  </p>
-                </form>
               )}
-            </motion.div>
+              {import.meta.env.VITE_COMPANY_LOCATION && (
+                <div>
+                  <dt className="text-sm text-ink-200">Location</dt>
+                  <dd className="mt-1 text-ink-500 dark:text-mist">
+                    {import.meta.env.VITE_COMPANY_LOCATION}
+                  </dd>
+                  <dd className="text-sm text-ink-300 dark:text-ink-200">Clients across Africa and elsewhere</dd>
+                </div>
+              )}
+              <div>
+                <dt className="text-sm text-ink-200">Availability</dt>
+                <dd className="mt-1 text-ink-500 dark:text-mist">Currently accepting projects</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div className="lg:col-span-6 lg:col-start-7">
+            {submitted ? (
+              <div className="border border-line px-6 py-10 dark:border-white/10" role="status">
+                <CheckCircle2 size={20} className="text-brand-600 dark:text-brand-300" aria-hidden="true" />
+                <h2 className="mt-4 font-heading text-2xl font-semibold text-ink-500 dark:text-mist">
+                  Message received
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-ink-300 dark:text-ink-200">
+                  Thanks for writing. We'll review the details and reply within one business day.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <Field id="name" label="Name" error={errors.name}>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      value={form.name}
+                      onChange={handleChange}
+                      autoComplete="name"
+                      className={inputClass('name')}
+                      aria-invalid={errors.name ? 'true' : undefined}
+                      aria-describedby={errors.name ? 'name-error' : undefined}
+                      required
+                    />
+                  </Field>
+                  <Field id="company" label="Company">
+                    <input
+                      id="company"
+                      name="company"
+                      type="text"
+                      value={form.company}
+                      onChange={handleChange}
+                      autoComplete="organization"
+                      className="field"
+                    />
+                  </Field>
+                </div>
+
+                <Field id="email" label="Email" error={errors.email}>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    autoComplete="email"
+                    className={inputClass('email')}
+                    aria-invalid={errors.email ? 'true' : undefined}
+                    aria-describedby={errors.email ? 'email-error' : undefined}
+                    required
+                  />
+                </Field>
+
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <Field id="projectType" label="Project type">
+                    <select
+                      id="projectType"
+                      name="projectType"
+                      value={form.projectType}
+                      onChange={handleChange}
+                      className="field"
+                    >
+                      <option value="">Select</option>
+                      {projectTypes.map(type => (
+                        <option key={type} value={type}>
+                          {type}
+                        </option>
+                      ))}
+                    </select>
+                  </Field>
+                  <Field id="budget" label="Budget range">
+                    <select id="budget" name="budget" value={form.budget} onChange={handleChange} className="field">
+                      <option value="">Select</option>
+                      {budgets.map(range => (
+                        <option key={range} value={range}>
+                          {range}
+                        </option>
+                      ))}
+                    </select>
+                  </Field>
+                </div>
+
+                <Field id="message" label="Project details" error={errors.message}>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={6}
+                    value={form.message}
+                    onChange={handleChange}
+                    placeholder="The problem, what you've already tried, and what success looks like."
+                    className={`${inputClass('message')} resize-y`}
+                    aria-invalid={errors.message ? 'true' : undefined}
+                    aria-describedby={errors.message ? 'message-error' : undefined}
+                    required
+                  />
+                </Field>
+
+                {serverError && (
+                  <p className="text-sm text-red-700 dark:text-red-300" role="alert">
+                    {serverError}
+                  </p>
+                )}
+
+                <button type="submit" disabled={loading} className="btn btn-primary w-full disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto">
+                  {loading ? 'Sending…' : 'Send message'}
+                </button>
+                <p className="text-sm text-ink-200">We reply within one business day.</p>
+              </form>
+            )}
           </div>
         </div>
       </section>

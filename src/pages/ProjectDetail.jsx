@@ -1,349 +1,185 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { ArrowLeft, ArrowRight, ExternalLink, Clock, CheckCircle2, MessageCircle } from 'lucide-react'
-import { projects } from '../utils/data'
+import { projects, projectScreens } from '../utils/data'
 import CTASection from '../components/CTASection'
+import ScreenGrid from '../components/ScreenGrid'
 
 export default function ProjectDetail() {
   const { id } = useParams()
-  const project = projects.find(p => p.id === id)
+  const project = projects.find(item => item.id === id)
 
   if (!project) return <Navigate to="/projects" replace />
 
-  const { title, industry, category, overview, problem, solution, outcome, metrics, tech, color, liveUrl, liveLabel, duration, deliverables } =
-    project
+  const {
+    title,
+    industry,
+    category,
+    overview,
+    problem,
+    solution,
+    outcome,
+    metrics,
+    tech,
+    liveUrl,
+    liveLabel,
+    duration,
+    deliverables,
+  } = project
 
-  const currentIndex = projects.findIndex(p => p.id === id)
+  const screens = projectScreens(project)
+
+  const currentIndex = projects.findIndex(item => item.id === id)
   const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null
   const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null
-  const otherProjects = projects.filter(p => p.id !== id).slice(0, 2)
+
+  const sections = [
+    { label: 'Overview', content: overview },
+    { label: 'The problem', content: problem },
+    { label: 'What we built', content: solution },
+    { label: 'The outcome', content: outcome },
+  ]
 
   return (
-    <main className="pt-20">
-      {/* Hero */}
-      <section className="pt-0 pb-0">
-        <div className="max-w-[1800px] mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+    <main>
+      <article>
+        <header className="border-b border-line dark:border-white/10">
+          <div className="page py-12 md:py-16">
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 text-sm text-ink-300 dark:text-ink-200 hover:text-ink-500 dark:hover:text-white transition-colors mb-8"
+              className="text-sm text-ink-300 underline-offset-4 hover:text-ink-500 hover:underline dark:text-ink-200 dark:hover:text-mist"
             >
-              <ArrowLeft size={14} /> Back to Projects
+              All projects
             </Link>
-
-            <div className="flex flex-wrap items-center gap-3 mb-6">
-              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900">
-                {industry}
-              </span>
-              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-ink-400 dark:text-ink-200">
-                {category}
-              </span>
-            </div>
-
-            <h1 className="font-heading text-5xl md:text-6xl font-black text-ink-500 dark:text-white mb-8 leading-tight max-w-3xl">
-              {title}
-            </h1>
-
-            {/* Tech stack */}
-            <div className="flex flex-wrap gap-2 mb-6 md:mb-10">
-              {tech.map(t => (
-                <span
-                  key={t}
-                  className="text-sm px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-ink-400 dark:text-ink-200 font-medium"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            {/* Live link   visible on mobile only; desktop shows it in sidebar */}
-            {liveUrl && (
-              <a
-                href={liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="lg:hidden inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition-colors mb-2"
-              >
-                {liveLabel || 'View Live'} <ExternalLink size={14} />
-              </a>
-            )}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Visual Banner */}
-      <section className="py-8">
-        <div className="max-w-[1800px] mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className={`relative h-72 md:h-96 rounded-3xl bg-gradient-to-br ${color} overflow-hidden`}
-          >
-            <div className="absolute inset-0 opacity-10">
-              <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <pattern id="detail-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#detail-grid)" />
-              </svg>
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="font-heading text-7xl md:text-9xl font-black text-white/10 select-none">
-                {title.charAt(0)}
-              </span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Metrics */}
-      <section className="py-12 bg-slate-50 dark:bg-slate-900/30 border-y border-slate-200 dark:border-slate-800">
-        <div className="max-w-[1800px] mx-auto px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            {metrics.map((metric, i) => (
-              <motion.div
-                key={metric.label}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="text-center"
-              >
-                <div className="font-heading text-4xl md:text-5xl font-black text-indigo-600 dark:text-indigo-400 mb-1">
-                  {metric.value}
-                </div>
-                <div className="text-sm text-ink-300 dark:text-ink-200 font-medium">
-                  {metric.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Content + Scope sidebar */}
-      <section className="section-padding">
-        <div className="max-w-[1800px] mx-auto px-6">
-          <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
-
-            {/* Main narrative */}
-            <div className="lg:col-span-2 space-y-12">
-              {[
-                { label: 'Overview', content: overview },
-                { label: 'The Problem', content: problem },
-                { label: 'Our Solution', content: solution },
-              ].map((section, i) => (
-                <motion.div
-                  key={section.label}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                >
-                  <h2 className="font-heading text-2xl font-bold text-ink-500 dark:text-white mb-4">
-                    {section.label}
-                  </h2>
-                  <p className="text-ink-400 dark:text-ink-200 leading-relaxed text-lg">
-                    {section.content}
-                  </p>
-                </motion.div>
-              ))}
-
-              {/* The Outcome */}
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                <h2 className="font-heading text-2xl font-bold text-ink-500 dark:text-white mb-4">
-                  The Outcome
-                </h2>
-                <p className="text-ink-400 dark:text-ink-200 leading-relaxed text-lg mb-8">
-                  {outcome}
-                </p>
-
-                {/* Mid-page CTA */}
-                <div className="p-4 md:p-6 rounded-2xl bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center flex-shrink-0">
-                      <MessageCircle size={18} className="text-white" />
-                    </div>
-                    <div>
-                      <p className="font-heading font-bold text-ink-500 dark:text-white mb-1">
-                        Building something similar?
-                      </p>
-                      <p className="text-sm text-ink-300 dark:text-ink-200 mb-4">
-                        We bring the same structured approach   clear scope, real deliverables, measurable outcomes   to every engagement.
-                      </p>
-                      <Link
-                        to="/contact"
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition-colors"
-                      >
-                        Start a conversation <ArrowRight size={14} />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Scope sidebar */}
-            <div className="lg:col-span-1">
-              <div className="sticky top-28 space-y-6">
-
-                {/* Engagement at a glance */}
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  className="p-4 md:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800"
-                >
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-200 dark:text-ink-300 mb-5">
-                    Engagement at a glance
-                  </h3>
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-xs text-ink-200 dark:text-ink-300 mb-1">Type</p>
-                      <p className="text-sm font-semibold text-ink-500 dark:text-white">{category}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-ink-200 dark:text-ink-300 mb-1">Industry</p>
-                      <p className="text-sm font-semibold text-ink-500 dark:text-white">{industry}</p>
-                    </div>
-                    {duration && (
-                      <div>
-                        <p className="text-xs text-ink-200 dark:text-ink-300 mb-1">Duration</p>
-                        <p className="text-sm font-semibold text-ink-500 dark:text-white flex items-center gap-1.5">
-                          <Clock size={13} className="text-indigo-500" /> {duration}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-
-                {/* Deliverables */}
-                {deliverables?.length > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                    className="p-4 md:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800"
-                  >
-                    <h3 className="text-xs font-semibold uppercase tracking-wider text-ink-200 dark:text-ink-300 mb-5">
-                      What we delivered
-                    </h3>
-                    <ul className="space-y-3">
-                      {deliverables.map(d => (
-                        <li key={d} className="flex items-start gap-2.5 text-sm text-ink-400 dark:text-ink-100">
-                          <CheckCircle2 size={15} className="text-indigo-500 flex-shrink-0 mt-0.5" />
-                          {d}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                )}
-
-                {/* Live link in sidebar too */}
-                {liveUrl && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
-                  >
-                    <a
-                      href={liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 dark:border-indigo-500 text-sm font-semibold hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-600 dark:hover:text-white transition-all"
-                    >
-                      {liveLabel || 'View Live'} <ExternalLink size={14} />
-                    </a>
-                  </motion.div>
-                )}
+            <p className="eyebrow mt-8">
+              {industry}
+              <span aria-hidden="true"> · </span>
+              {category}
+              {duration ? (
+                <>
+                  <span aria-hidden="true"> · </span>
+                  {duration}
+                </>
+              ) : null}
+            </p>
+            <h1 className="page-title mt-3 max-w-3xl">{title}</h1>
+            {screens.length > 0 ? (
+              <div className="mt-8">
+                <ScreenGrid key={id} screens={screens} title={title} />
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* More Projects */}
-      {otherProjects.length > 0 && (
-        <section className="section-padding bg-slate-50 dark:bg-slate-900/30 border-t border-slate-200 dark:border-slate-800">
-          <div className="max-w-[1800px] mx-auto px-6">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="font-heading text-2xl font-bold text-ink-500 dark:text-white">
-                More work
-              </h2>
-              <Link
-                to="/projects"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:gap-2.5 transition-all"
-              >
-                All projects <ArrowRight size={14} />
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {otherProjects.map(p => (
-                <Link
-                  key={p.id}
-                  to={`/projects/${p.id}`}
-                  className={`relative h-48 rounded-2xl bg-gradient-to-br ${p.color} overflow-hidden group`}
-                >
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-                  <div className="absolute bottom-6 left-6">
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-white/20 text-white mb-2 inline-block">
-                      {p.industry}
-                    </span>
-                    <h3 className="font-heading text-xl font-bold text-white">{p.title}</h3>
-                  </div>
-                </Link>
+            ) : null}
+            <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-1 text-sm text-ink-300 dark:text-ink-200">
+              {tech.map(item => (
+                <li key={item}>{item}</li>
               ))}
-            </div>
+            </ul>
           </div>
-        </section>
-      )}
+        </header>
 
-      {/* Prev / Next navigation */}
-      {(prevProject || nextProject) && (
-        <section className="border-t border-slate-200 dark:border-slate-800">
-          <div className="max-w-[1800px] mx-auto px-6 py-8 flex justify-between gap-4">
-            {prevProject ? (
-              <Link
-                to={`/projects/${prevProject.id}`}
-                className="group flex items-center gap-3 text-left"
-              >
-                <ArrowLeft size={16} className="text-ink-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0" />
-                <div>
-                  <p className="text-xs text-ink-200 dark:text-ink-300 mb-0.5">Previous</p>
-                  <p className="text-sm font-semibold text-ink-500 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                    {prevProject.title}
-                  </p>
+        {metrics?.length > 0 && (
+          <section aria-label="Results" className="border-b border-line dark:border-white/10">
+            <dl className="page grid sm:grid-cols-3">
+              {metrics.map((metric, index) => (
+                <div
+                  key={metric.label}
+                  className={`py-6 sm:px-6 sm:first:pl-0 ${
+                    index > 0 ? 'border-t border-line sm:border-l sm:border-t-0 dark:border-white/10' : ''
+                  }`}
+                >
+                  <dt className="text-sm text-ink-300 dark:text-ink-200">{metric.label}</dt>
+                  <dd className="mt-1 font-heading text-2xl font-semibold text-ink-500 dark:text-mist">
+                    {metric.value}
+                  </dd>
                 </div>
+              ))}
+            </dl>
+          </section>
+        )}
+
+        <div className="page grid gap-12 py-14 lg:grid-cols-12 lg:py-16">
+          <div className="space-y-10 lg:col-span-7">
+            {sections.map(section => (
+              <section key={section.label}>
+                <h2 className="font-heading text-xl font-semibold text-ink-500 dark:text-mist">
+                  {section.label}
+                </h2>
+                <p className="mt-3 leading-relaxed text-ink-300 dark:text-ink-200">{section.content}</p>
+              </section>
+            ))}
+            <p className="border-t border-line pt-6 text-sm text-ink-300 dark:border-white/10 dark:text-ink-200">
+              Building something in this space?{' '}
+              <Link to="/contact" className="font-medium text-ink-500 underline-offset-4 hover:underline dark:text-mist">
+                Start a conversation
               </Link>
-            ) : <div />}
-            {nextProject && (
-              <Link
-                to={`/projects/${nextProject.id}`}
-                className="group flex items-center gap-3 text-right"
-              >
+            </p>
+          </div>
+
+          <aside className="lg:col-span-4 lg:col-start-9">
+            <div className="space-y-8 lg:sticky lg:top-20">
+              <div>
+                <h2 className="text-[11px] font-medium uppercase tracking-[0.16em] text-ink-200">Engagement</h2>
+                <dl className="mt-4 space-y-3 text-sm">
+                  <div className="flex justify-between gap-4 border-b border-line pb-3 dark:border-white/10">
+                    <dt className="text-ink-300 dark:text-ink-200">Type</dt>
+                    <dd className="text-right text-ink-500 dark:text-mist">{category}</dd>
+                  </div>
+                  <div className="flex justify-between gap-4 border-b border-line pb-3 dark:border-white/10">
+                    <dt className="text-ink-300 dark:text-ink-200">Industry</dt>
+                    <dd className="text-right text-ink-500 dark:text-mist">{industry}</dd>
+                  </div>
+                  {duration && (
+                    <div className="flex justify-between gap-4 border-b border-line pb-3 dark:border-white/10">
+                      <dt className="text-ink-300 dark:text-ink-200">Duration</dt>
+                      <dd className="text-right text-ink-500 dark:text-mist">{duration}</dd>
+                    </div>
+                  )}
+                </dl>
+              </div>
+
+              {deliverables?.length > 0 && (
                 <div>
-                  <p className="text-xs text-ink-200 dark:text-ink-300 mb-0.5">Next</p>
-                  <p className="text-sm font-semibold text-ink-500 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                    {nextProject.title}
-                  </p>
+                  <h2 className="text-[11px] font-medium uppercase tracking-[0.16em] text-ink-200">
+                    Delivered
+                  </h2>
+                  <ul className="mt-4 space-y-2 text-sm leading-relaxed text-ink-400 dark:text-ink-200">
+                    {deliverables.map(item => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
                 </div>
-                <ArrowRight size={16} className="text-ink-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0" />
+              )}
+
+              {liveUrl && (
+                <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                  {liveLabel || 'View live'}
+                </a>
+              )}
+            </div>
+          </aside>
+        </div>
+      </article>
+
+      {(prevProject || nextProject) && (
+        <nav aria-label="More projects" className="border-t border-line dark:border-white/10">
+          <div className="page grid gap-6 py-8 sm:grid-cols-2">
+            {prevProject ? (
+              <Link to={`/projects/${prevProject.id}`} className="group">
+                <p className="text-sm text-ink-200">Previous</p>
+                <p className="mt-1 font-medium text-ink-500 group-hover:underline group-hover:underline-offset-4 dark:text-mist">
+                  {prevProject.title}
+                </p>
+              </Link>
+            ) : (
+              <div />
+            )}
+            {nextProject && (
+              <Link to={`/projects/${nextProject.id}`} className="group sm:text-right">
+                <p className="text-sm text-ink-200">Next</p>
+                <p className="mt-1 font-medium text-ink-500 group-hover:underline group-hover:underline-offset-4 dark:text-mist">
+                  {nextProject.title}
+                </p>
               </Link>
             )}
           </div>
-        </section>
+        </nav>
       )}
 
       <CTASection />

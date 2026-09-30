@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="77 77 265 265">
+  <title>Quoxova</title>
+  <defs>
+    <linearGradient id="g" gradientUnits="userSpaceOnUse" x1="56" y1="56" x2="456" y2="456">
+      <stop offset="0" stop-color="#FF4FD8"/>
+      <stop offset="1" stop-color="#7B3DFF"/>
+    </linearGradient>
+    <style>
+      .orbit { stroke: #1B1446; }
+      @media (prefers-color-scheme: dark) {
+        .orbit { stroke: #F6F4FC; }
+      }
+    </style>
+  </defs>
+  <g transform="translate(20 20) scale(0.74)">
+    <ellipse class="orbit" cx="256" cy="256" rx="205" ry="80" transform="rotate(45 256 256)" fill="none" stroke-width="24"/>
+    <ellipse cx="256" cy="256" rx="205" ry="80" transform="rotate(-45 256 256)" fill="none" stroke="url(#g)" stroke-width="24"/>
+    <path d="M256 194 C261.7 240.5 271.5 250.3 318 256 C271.5 261.7 261.7 271.5 256 318 C250.3 271.5 240.5 261.7 194 256 C240.5 250.3 250.3 240.5 256 194 Z" fill="url(#g)"/>
+    <circle cx="279.5" cy="377.5" r="22" fill="url(#g)"/>
+  </g>
+</svg>

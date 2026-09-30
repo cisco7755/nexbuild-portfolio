@@ -1,497 +1,217 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import {
-  ArrowRight,
-  Globe,
-  Smartphone,
-  Layers,
-  Server,
-  Heart,
-  TrendingUp,
-  Truck,
-  Cloud,
-  CheckCircle2,
-  GitCommit,
-  MessageSquare,
-  CheckCheck,
-} from 'lucide-react'
 import { projects, services, stats, industries, processSteps, testimonials } from '../utils/data'
 import ProjectCard from '../components/ProjectCard'
 import CTASection from '../components/CTASection'
-import SectionWrapper from '../components/SectionWrapper'
-
-const serviceIcons = { Globe, Smartphone, Layers, Server }
-const industryIcons = { Heart, TrendingUp, Truck, Cloud }
-
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6 },
-}
 
 export default function Home() {
-  const featuredProjects = projects.filter(p => p.featured)
+  const featuredProjects = projects.filter(project => project.featured)
 
   return (
     <main>
-      {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/20 via-transparent to-violet-950/10 dark:from-indigo-950/40 dark:via-slate-950 dark:to-violet-950/20" />
-        {/* Animated orbs */}
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-indigo-500/8 dark:bg-indigo-500/12 blur-3xl pointer-events-none"
-          animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-500/6 dark:bg-violet-500/10 blur-3xl pointer-events-none"
-          animate={{ x: [0, -30, 0], y: [0, 40, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        />
-        <motion.div
-          className="absolute top-1/2 right-1/3 w-[300px] h-[300px] rounded-full bg-cyan-500/4 dark:bg-cyan-500/8 blur-3xl pointer-events-none"
-          animate={{ x: [0, 20, 0], y: [0, -50, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
-        />
-
-        {/* Floating dev-collaboration mockups — abstract stand-in for team/work environment */}
-        <motion.div
-          className="hidden lg:block absolute top-[22%] left-[6%] xl:left-[10%] w-56 glass-card p-3 pointer-events-none select-none"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: [0, -12, 0] }}
-          transition={{ opacity: { duration: 0.8, delay: 0.4 }, y: { duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.4 } }}
-        >
-          <div className="flex items-center gap-1.5 mb-2.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
-            <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-            <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
-          </div>
-          <div className="space-y-1.5 font-mono text-[10px] leading-relaxed">
-            <p className="text-indigo-500 dark:text-indigo-400">function <span className="text-ink-400 dark:text-ink-100">deploy</span>() {'{'}</p>
-            <p className="text-ink-200 dark:text-ink-300 pl-3">run tests <span className="text-emerald-500">✓</span></p>
-            <p className="text-ink-200 dark:text-ink-300 pl-3">build <span className="text-emerald-500">✓</span></p>
-            <p className="text-ink-400 dark:text-ink-100">{'}'}</p>
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="hidden lg:block absolute top-[16%] right-[4%] xl:right-[8%] w-52 glass-card p-3.5 pointer-events-none select-none"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: [0, -14, 0] }}
-          transition={{ opacity: { duration: 0.8, delay: 0.6 }, y: { duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 0.6 } }}
-        >
-          <div className="flex items-center gap-2 mb-2">
-            <div className="flex -space-x-2">
-              {['bg-indigo-500', 'bg-violet-500', 'bg-cyan-500'].map((c, i) => (
-                <span key={i} className={`w-6 h-6 rounded-full ${c} border-2 border-white dark:border-slate-900`} />
-              ))}
-            </div>
-            <span className="text-[10px] font-semibold text-ink-300 dark:text-ink-200">3 online</span>
-          </div>
-          <div className="flex items-start gap-1.5 text-[10px] text-ink-400 dark:text-ink-100">
-            <MessageSquare size={12} className="mt-0.5 text-indigo-500 flex-shrink-0" />
-            <p>Staging looks good, shipping to prod 🚀</p>
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="hidden lg:block absolute bottom-[18%] left-[10%] xl:left-[14%] w-48 glass-card p-3 pointer-events-none select-none"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: [0, -10, 0] }}
-          transition={{ opacity: { duration: 0.8, delay: 0.8 }, y: { duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 0.8 } }}
-        >
-          <div className="flex items-center gap-2 text-[10px]">
-            <GitCommit size={13} className="text-violet-500 flex-shrink-0" />
-            <span className="text-ink-400 dark:text-ink-100 font-medium">feat: add payment retry</span>
-          </div>
-          <div className="flex items-center gap-1.5 mt-1.5 text-[10px] text-emerald-500 font-semibold">
-            <CheckCheck size={13} />
-            Deployed to production
-          </div>
-        </motion.div>
-
-        <div className="relative max-w-[1800px] mx-auto px-6 py-24 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-6 px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-100 dark:border-indigo-900">
-              Senior Engineers. Zero Handoffs.
-            </span>
-
-            <h1 className="font-heading text-5xl md:text-7xl font-black text-ink-500 dark:text-white leading-tight mb-6 max-w-4xl mx-auto">
-              We build software that helps businesses{' '}
-              <span className="gradient-text">launch faster</span> and scale without friction.
+      <section className="border-b border-line dark:border-white/10">
+        <div className="page grid gap-12 py-16 md:py-24 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-8">
+            <p className="eyebrow">Software studio</p>
+            <h1 className="page-title mt-4">
+              We build software that helps businesses launch faster and scale without friction.
             </h1>
-
-            <p className="text-lg md:text-xl text-ink-300 dark:text-ink-200 max-w-2xl mx-auto mb-8 leading-relaxed">
-              From healthcare platforms to fintech infrastructure    48+ production-ready products
-              shipped across 4 industries that businesses depend on every day.
+            <p className="lede mt-5 max-w-xl">
+              From healthcare platforms to fintech infrastructure. {stats[0].value} production products
+              shipped across {stats[2].value} industries that businesses depend on every day.
             </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                to="/projects"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition-all hover:shadow-lg hover:shadow-indigo-500/25 text-sm w-full sm:w-auto justify-center"
-              >
-                View Our Work <ArrowRight size={16} />
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link to="/projects" className="btn btn-primary">
+                View our work
               </Link>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-slate-200 dark:border-slate-700 text-ink-400 dark:text-ink-100 font-semibold hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors text-sm w-full sm:w-auto justify-center"
-              >
-                Start a Project
+              <Link to="/contact" className="btn btn-secondary">
+                Start a project
               </Link>
             </div>
+          </div>
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                </span>
-                Open for new projects
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-8 self-end lg:col-span-4 lg:border-l lg:border-line lg:pl-10 dark:lg:border-white/10">
+            {stats.map(stat => (
+              <div key={stat.label}>
+                <dt className="text-sm text-ink-300 dark:text-ink-200">{stat.label}</dt>
+                <dd className="mt-1 font-heading text-2xl font-semibold text-ink-500 dark:text-mist">
+                  {stat.value}
+                </dd>
               </div>
-              <div className="hidden sm:block w-px h-4 bg-slate-200 dark:bg-slate-700" />
-              <div className="flex items-center gap-1.5 text-xs font-medium text-ink-300 dark:text-ink-200">
-                <CheckCircle2 size={14} className="text-indigo-500 flex-shrink-0" />
-                48+ Projects Delivered
-              </div>
-              <div className="hidden sm:block w-px h-4 bg-slate-200 dark:bg-slate-700" />
-              <div className="flex items-center gap-1.5 text-xs font-medium text-ink-300 dark:text-ink-200">
-                <CheckCircle2 size={14} className="text-indigo-500 flex-shrink-0" />
-                98% Client Retention
-              </div>
-              <div className="hidden sm:block w-px h-4 bg-slate-200 dark:bg-slate-700" />
-              <div className="flex items-center gap-1.5 text-xs font-medium text-ink-300 dark:text-ink-200">
-                <CheckCircle2 size={14} className="text-indigo-500 flex-shrink-0" />
-                Health · Fintech · Logistics · SaaS
-              </div>
-            </div>
-          </motion.div>
+            ))}
+          </dl>
         </div>
       </section>
 
-      {/* Trusted by strip */}
-      <div className="border-y border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 py-5 overflow-hidden">
-        <div className="flex items-center gap-3 mb-1 px-6 max-w-[1800px] mx-auto">
-          <span className="text-xs font-semibold uppercase tracking-widest text-ink-200 dark:text-ink-300 whitespace-nowrap">
-            Trusted by
-          </span>
-        </div>
-        <div className="relative flex overflow-hidden">
-          <motion.div
-            className="flex gap-12 items-center whitespace-nowrap px-6"
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-          >
-            {[
-              'HealthTrack Network', 'ClearPay', 'FleetOps Africa', 'TalentHive',
-              'MediSync EMR', 'TradeFlow Analytics', 'HealthTrack Network', 'ClearPay',
-              'FleetOps Africa', 'TalentHive', 'MediSync EMR', 'TradeFlow Analytics',
-            ].map((name, i) => (
-              <span key={i} className="text-sm font-semibold text-ink-200 dark:text-ink-300">
-                {name}
-              </span>
+      <section className="section-padding" aria-labelledby="work-heading">
+        <div className="page">
+          <div className="mb-8 max-w-xl md:mb-10">
+            <p className="eyebrow">Case studies</p>
+            <h2 id="work-heading" className="section-title mt-3">
+              Work we're proud of
+            </h2>
+            <p className="mt-3 text-ink-300 dark:text-ink-200">
+              Each study covers the problem, what we built, and the result.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {featuredProjects.map(project => (
+              <ProjectCard key={project.id} project={project} card />
             ))}
-          </motion.div>
-        </div>
-      </div>
+          </div>
 
-      {/* Stats */}
-      <SectionWrapper className="bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800 !py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="text-center"
-            >
-              <div className="font-heading text-4xl md:text-5xl font-black text-ink-500 dark:text-white mb-1">
-                {stat.value}
-              </div>
-              <div className="text-sm text-ink-300 dark:text-ink-200 font-medium">{stat.label}</div>
-            </motion.div>
-          ))}
-        </div>
-      </SectionWrapper>
-
-      {/* Featured Projects */}
-      <SectionWrapper id="projects">
-        <motion.div {...fadeUp} className="mb-8 md:mb-12">
-          <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
-            Case Studies
-          </span>
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-ink-500 dark:text-white mb-4">
-            Work we're proud of
-          </h2>
-          <p className="text-ink-300 dark:text-ink-200 text-lg max-w-xl">
-            Real projects. Real outcomes. Every case study includes the problem, the solution, and the
-            measurable result.
+          <p className="mt-8">
+            <Link to="/projects" className="text-sm font-medium text-ink-500 underline-offset-4 hover:underline dark:text-mist">
+              All case studies
+            </Link>
           </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 md:mb-10">
-          {featuredProjects.map(project => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
         </div>
+      </section>
 
-        <motion.div {...fadeUp} className="text-center">
-          <Link
-            to="/projects"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:gap-3 transition-all"
-          >
-            View all case studies <ArrowRight size={14} />
-          </Link>
-        </motion.div>
-      </SectionWrapper>
+      <section className="border-t border-line dark:border-white/10" aria-labelledby="services-heading">
+        <div className="page py-16 md:py-20">
+          <div className="mb-2 max-w-xl">
+            <p className="eyebrow">Services</p>
+            <h2 id="services-heading" className="section-title mt-3">
+              Built for the full stack
+            </h2>
+            <p className="mt-3 text-ink-300 dark:text-ink-200">
+              From the interface to the infrastructure beneath it.
+            </p>
+          </div>
 
-      {/* Services Overview */}
-      <SectionWrapper className="bg-slate-50 dark:bg-slate-900/30">
-        <motion.div {...fadeUp} className="mb-8 md:mb-12">
-          <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
-            What We Do
-          </span>
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-ink-500 dark:text-white mb-4">
-            Built for the full stack
-          </h2>
-          <p className="text-ink-300 dark:text-ink-200 text-lg max-w-xl">
-            From the user interface to the infrastructure beneath it   we own the entire build.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, i) => {
-            const Icon = serviceIcons[service.icon]
-            return (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="p-4 md:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-700 transition-all group"
-              >
-                <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center mb-4 group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/50 transition-colors">
-                  <Icon size={18} className="text-indigo-600 dark:text-indigo-400" />
-                </div>
-                <h3 className="font-heading font-bold text-ink-500 dark:text-white mb-2">
-                  {service.title}
-                </h3>
-                <p className="text-sm text-ink-300 dark:text-ink-200 leading-relaxed">
-                  {service.tagline}
-                </p>
+          <ol className="mt-8 border-t border-line dark:border-white/10">
+            {services.map((service, index) => (
+              <li key={service.id} className="border-b border-line dark:border-white/10">
                 <Link
                   to={`/services#${service.id}`}
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-4 hover:gap-2 transition-all"
+                  className="grid gap-2 py-6 md:grid-cols-12 md:items-baseline md:gap-6"
                 >
-                  Learn more <ArrowRight size={12} />
+                  <span className="text-sm tabular-nums text-ink-200 md:col-span-1">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="font-heading text-xl font-semibold text-ink-500 dark:text-mist md:col-span-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-ink-300 dark:text-ink-200 md:col-span-8">
+                    {service.tagline}
+                  </p>
                 </Link>
-              </motion.div>
-            )
-          })}
+              </li>
+            ))}
+          </ol>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* Industries */}
-      <SectionWrapper>
-        <motion.div {...fadeUp} className="mb-8 md:mb-12">
-          <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
-            Specialization
-          </span>
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-ink-500 dark:text-white mb-4">
-            Industries we know deeply
-          </h2>
-          <p className="text-ink-300 dark:text-ink-200 text-lg max-w-xl">
-            Domain knowledge changes the quality of the software. We've worked deep enough in these
-            industries to know what actually matters.
-          </p>
-        </motion.div>
+      <section className="border-t border-line dark:border-white/10" aria-labelledby="industries-heading">
+        <div className="page py-16 md:py-20">
+          <div className="max-w-xl">
+            <p className="eyebrow">Industries</p>
+            <h2 id="industries-heading" className="section-title mt-3">
+              Industries we know deeply
+            </h2>
+            <p className="mt-3 text-ink-300 dark:text-ink-200">
+              Domain knowledge changes the quality of the software. We've worked in these fields long enough to know what actually matters.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {industries.map((industry, i) => {
-            const Icon = industryIcons[industry.icon]
-            return (
-              <motion.div
-                key={industry.id}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="flex gap-5 p-4 md:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800"
-              >
-                <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center flex-shrink-0">
-                  <Icon size={20} className="text-indigo-600 dark:text-indigo-400" />
-                </div>
-                <div>
-                  <h3 className="font-heading font-bold text-ink-500 dark:text-white mb-2">
-                    {industry.title}
-                  </h3>
-                  <p className="text-sm text-ink-300 dark:text-ink-200 leading-relaxed mb-3">
-                    {industry.description}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {industry.examples.map(ex => (
-                      <span
-                        key={ex}
-                        className="text-xs px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-ink-400 dark:text-ink-200 font-medium"
-                      >
-                        {ex}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            )
-          })}
-        </div>
-      </SectionWrapper>
-
-      {/* Process */}
-      <SectionWrapper className="bg-slate-50 dark:bg-slate-900/30">
-        <motion.div {...fadeUp} className="mb-8 md:mb-12">
-          <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
-            How We Work
-          </span>
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-ink-500 dark:text-white mb-4">
-            No surprises at launch
-          </h2>
-          <p className="text-ink-300 dark:text-ink-200 text-lg max-w-xl">
-            A structured process means every decision is made at the right time   not improvised
-            under deadline pressure.
-          </p>
-        </motion.div>
-
-        <div className="relative">
-          <div className="hidden md:block absolute left-8 top-8 bottom-8 w-px bg-slate-200 dark:bg-slate-800" />
-          <div className="space-y-4">
-            {processSteps.map((step, i) => (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="relative flex gap-6 p-4 md:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 md:ml-4"
-              >
-                <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center md:relative md:-left-8">
-                  <span className="text-white text-xs font-bold font-heading">{step.number}</span>
-                </div>
-                <div>
-                  <h3 className="font-heading font-bold text-ink-500 dark:text-white mb-1">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-ink-300 dark:text-ink-200 leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </motion.div>
+          <div className="mt-10 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+            {industries.map(industry => (
+              <div key={industry.id} className="border-t border-line pt-5 dark:border-white/10">
+                <h3 className="font-heading text-xl font-semibold text-ink-500 dark:text-mist">
+                  {industry.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-300 dark:text-ink-200">
+                  {industry.description}
+                </p>
+                <p className="mt-3 text-sm text-ink-400 dark:text-ink-200">
+                  {industry.examples.join(' · ')}
+                </p>
+              </div>
             ))}
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* About Preview */}
-      <SectionWrapper>
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div {...fadeUp}>
-            <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
-              Who We Are
-            </span>
-            <h2 className="font-heading text-4xl font-bold text-ink-500 dark:text-white mb-6 leading-tight">
-              A team that ships   and keeps shipping.
+      <section className="border-t border-line dark:border-white/10" aria-labelledby="process-heading">
+        <div className="page grid gap-10 py-16 md:grid-cols-12 md:py-20">
+          <div className="md:col-span-4">
+            <p className="eyebrow">How we work</p>
+            <h2 id="process-heading" className="section-title mt-3">
+              No surprises at launch
             </h2>
-            <p className="text-ink-300 dark:text-ink-200 leading-relaxed mb-6">
-              Quoxova is a software development company focused on building products that work under
-              real-world conditions. We don't prototype and hand off. We build, deploy, and stand
-              behind the systems we ship.
+            <p className="mt-3 text-ink-300 dark:text-ink-200">
+              Decisions are made at the right time, not improvised under a deadline.
             </p>
-            <p className="text-ink-300 dark:text-ink-200 leading-relaxed mb-8">
-              Our team has shipped software across four industries   health, fintech, logistics, and
-              SaaS   and we bring that cross-domain experience to every new engagement.
-            </p>
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:gap-3 transition-all"
-            >
-              Learn more about Quoxova <ArrowRight size={14} />
-            </Link>
-          </motion.div>
+          </div>
+          <ol className="md:col-span-8">
+            {processSteps.map(step => (
+              <li key={step.number} className="grid grid-cols-[3rem_1fr] gap-4 border-t border-line py-5 dark:border-white/10">
+                <span className="pt-1 text-sm tabular-nums text-ink-200">{step.number}</span>
+                <div>
+                  <h3 className="font-medium text-ink-500 dark:text-mist">{step.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-ink-300 dark:text-ink-200">
+                    {step.description}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-2 gap-4"
-          >
+      <section className="border-t border-line dark:border-white/10">
+        <div className="page grid gap-10 py-16 md:grid-cols-12 md:py-20">
+          <div className="md:col-span-6">
+            <p className="eyebrow">About</p>
+            <h2 className="section-title mt-3">A team that ships, and keeps shipping.</h2>
+            <p className="mt-4 leading-relaxed text-ink-300 dark:text-ink-200">
+              Quoxova is a software development company focused on building products that work under real-world conditions. We don't prototype and hand off. We build, deploy, and stand behind the systems we ship.
+            </p>
+            <p className="mt-4 leading-relaxed text-ink-300 dark:text-ink-200">
+              Our team has shipped software across health, fintech, logistics, and SaaS, and we bring that experience to every new engagement.
+            </p>
+            <p className="mt-6">
+              <Link to="/about" className="text-sm font-medium text-ink-500 underline-offset-4 hover:underline dark:text-mist">
+                About Quoxova
+              </Link>
+            </p>
+          </div>
+          <ul className="md:col-span-5 md:col-start-8">
             {[
               "We write code we'd maintain ourselves.",
               'No handoffs to junior devs after the sale.',
               'We flag scope problems before they become cost overruns.',
               'We document what we build so your team can own it.',
-            ].map((point, i) => (
-              <div
-                key={i}
-                className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex gap-3"
-              >
-                <CheckCircle2 size={16} className="text-indigo-500 flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-ink-400 dark:text-ink-200 leading-relaxed">{point}</p>
-              </div>
+            ].map(point => (
+              <li key={point} className="border-t border-line py-4 text-sm leading-relaxed text-ink-400 dark:border-white/10 dark:text-ink-200">
+                {point}
+              </li>
             ))}
-          </motion.div>
+          </ul>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* Testimonials */}
-      <SectionWrapper className="section-padding bg-slate-50 dark:bg-slate-900/30 border-t border-slate-200 dark:border-slate-800">
-        <div className="max-w-[1800px] mx-auto px-6">
-          <motion.div {...fadeUp} className="mb-8 md:mb-12 text-center">
-            <span className="text-xs font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 mb-3 block">
-              Client Results
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-ink-500 dark:text-white">
-              Don't take our word for it.
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={t.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.12 }}
-                className="flex flex-col p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800"
-              >
-                {/* Quote marks */}
-                <svg className="w-8 h-8 text-indigo-200 dark:text-indigo-900 mb-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
-                </svg>
-                <p className="text-ink-400 dark:text-ink-100 text-sm leading-relaxed flex-1 mb-6">
-                  "{t.quote}"
-                </p>
-                <div className="flex items-center gap-3 mt-auto">
-                  <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.color} flex items-center justify-center flex-shrink-0`}>
-                    <span className="text-white font-bold text-xs font-heading">{t.initials}</span>
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-ink-500 dark:text-white">{t.name}</p>
-                    <p className="text-xs text-ink-300 dark:text-ink-200">{t.title}</p>
-                  </div>
-                </div>
-              </motion.div>
+      <section className="border-t border-line dark:border-white/10" aria-labelledby="clients-heading">
+        <div className="page py-16 md:py-20">
+          <h2 id="clients-heading" className="section-title">
+            What clients say
+          </h2>
+          <div className="mt-10 grid gap-10 md:grid-cols-3">
+            {testimonials.map(item => (
+              <figure key={item.name} className="border-t border-line pt-5 dark:border-white/10">
+                <blockquote className="font-heading text-lg leading-snug text-ink-500 dark:text-mist">
+                  “{item.quote}”
+                </blockquote>
+                <figcaption className="mt-4 text-sm">
+                  <span className="block font-medium text-ink-500 dark:text-mist">{item.name}</span>
+                  <span className="text-ink-300 dark:text-ink-200">{item.title}</span>
+                </figcaption>
+              </figure>
             ))}
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
       <CTASection />
     </main>
