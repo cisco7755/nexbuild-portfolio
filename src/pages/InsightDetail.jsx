@@ -1,5 +1,7 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import CTASection from '../components/CTASection'
+import Seo from '../components/Seo'
+import { insightDocument } from '../seo/documents'
 
 const articles = [
   {
@@ -422,6 +424,7 @@ export default function InsightDetail() {
 
   return (
     <main>
+      <Seo doc={insightDocument(article)} />
       <article>
         <header className="border-b border-line dark:border-white/10">
           <div className="page py-12 md:py-16">

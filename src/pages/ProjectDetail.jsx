@@ -2,6 +2,8 @@ import { useParams, Link, Navigate } from 'react-router-dom'
 import { projects, projectScreens } from '../utils/data'
 import CTASection from '../components/CTASection'
 import ScreenGrid from '../components/ScreenGrid'
+import Seo from '../components/Seo'
+import { projectDocument } from '../seo/documents'
 
 export default function ProjectDetail() {
   const { id } = useParams()
@@ -40,6 +42,7 @@ export default function ProjectDetail() {
 
   return (
     <main>
+      <Seo doc={projectDocument(project)} />
       <article>
         <header className="border-b border-line dark:border-white/10">
           <div className="page py-12 md:py-16">

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { CheckCircle2 } from 'lucide-react'
+import Seo from '../components/Seo'
+import { contactDocument } from '../seo/documents'
 
 const projectTypes = [
   'Web Application',
@@ -85,6 +87,7 @@ export default function Contact() {
 
   return (
     <main>
+      <Seo doc={contactDocument()} />
       <section className="section-padding">
         <div className="page grid items-start gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">

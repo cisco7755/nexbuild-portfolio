@@ -2,12 +2,15 @@ import { Link } from 'react-router-dom'
 import { projects, services, stats, industries, processSteps, testimonials } from '../utils/data'
 import ProjectCard from '../components/ProjectCard'
 import CTASection from '../components/CTASection'
+import Seo from '../components/Seo'
+import { homeDocument } from '../seo/documents'
 
 export default function Home() {
   const featuredProjects = projects.filter(project => project.featured)
 
   return (
     <main>
+      <Seo doc={homeDocument()} />
       <section className="border-b border-line dark:border-white/10">
         <div className="page grid gap-12 py-16 md:py-24 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-8">

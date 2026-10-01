@@ -26,7 +26,7 @@ export const projects = [
     featured: true,
     duration: '28 weeks',
     deliverables: ['React Native app (iOS + Android)', 'Firebase real-time messaging', 'Community and events system', 'Moments content feed', 'Google & Apple SSO', 'Push notification system'],
-    liveUrl: import.meta.env.VITE_WHISTLER_PLAYSTORE_URL,
+    liveUrl: typeof import.meta.env !== 'undefined' ? import.meta.env.VITE_WHISTLER_PLAYSTORE_URL : undefined,
     liveLabel: 'View on Play Store',
   },
   {
@@ -56,7 +56,7 @@ export const projects = [
     featured: false,
     duration: '10 weeks',
     deliverables: ['React/TypeScript admin SPA', 'Community moderation queue', 'User management and suspension tools', 'Moments review workflow', 'Activity audit log'],
-    liveUrl: import.meta.env.VITE_WHISTLER_ADMIN_URL,
+    liveUrl: typeof import.meta.env !== 'undefined' ? import.meta.env.VITE_WHISTLER_ADMIN_URL : undefined,
     liveLabel: 'View Admin Demo',
   },
   {
@@ -86,7 +86,7 @@ export const projects = [
     featured: true,
     duration: '22 weeks',
     deliverables: ['Buyer shopping portal', 'Seller dashboard with KYC onboarding', 'Admin control panel', 'Flash sales and deals engine', 'Dispute resolution workflow', 'Seller wallet and payout system'],
-    liveUrl: import.meta.env.VITE_BETABUY_URL,
+    liveUrl: typeof import.meta.env !== 'undefined' ? import.meta.env.VITE_BETABUY_URL : undefined,
     liveLabel: 'View Live Site',
   },
   {
@@ -116,7 +116,7 @@ export const projects = [
     featured: true,
     duration: '32 weeks',
     deliverables: ['Angular 18 SPA with drag  and  drop form builder', 'Multi  channel deployment (Web, Email, SMS, WhatsApp)', 'Real  time analytics dashboard', 'Microservices backend (Java + NestJS)', 'Role  based access control', 'Paystack billing integration'],
-    liveUrl: import.meta.env.VITE_CLIENTSHOT_URL,
+    liveUrl: typeof import.meta.env !== 'undefined' ? import.meta.env.VITE_CLIENTSHOT_URL : undefined,
     liveLabel: 'View Live Site',
   },
   {
@@ -146,7 +146,7 @@ export const projects = [
     featured: false,
     duration: '8 weeks',
     deliverables: ['Angular 18 admin SPA', 'Account and facility management', 'Branch configuration tools', 'Activity audit log', 'Client onboarding workflow'],
-    liveUrl: import.meta.env.VITE_CLIENTSHOT_ADMIN_URL,
+    liveUrl: typeof import.meta.env !== 'undefined' ? import.meta.env.VITE_CLIENTSHOT_ADMIN_URL : undefined,
     liveLabel: 'View Admin Demo',
   },
   {

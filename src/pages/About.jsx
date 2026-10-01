@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { stats, processSteps } from '../utils/data'
 import CTASection from '../components/CTASection'
 import AnimatedStat from '../components/AnimatedStat'
+import Seo from '../components/Seo'
+import { aboutDocument } from '../seo/documents'
 
 const values = [
   {
@@ -65,6 +67,7 @@ function Mark({ yes }) {
 export default function About() {
   return (
     <main>
+      <Seo doc={aboutDocument()} />
       <section className="border-b border-line dark:border-white/10">
         <div className="page py-14 md:py-20">
           <p className="eyebrow">About</p>

@@ -4,6 +4,8 @@ import { projects } from '../utils/data'
 import ProjectCard from '../components/ProjectCard'
 import ProjectCardSkeleton from '../components/ProjectCardSkeleton'
 import CTASection from '../components/CTASection'
+import Seo from '../components/Seo'
+import { projectsDocument } from '../seo/documents'
 
 const industries = ['All', 'Health', 'Fintech', 'Logistics', 'SaaS', 'Social', 'E-commerce']
 const serviceTypes = ['All', 'Web Development', 'Mobile Apps', 'Backend Systems']
@@ -67,6 +69,7 @@ export default function Projects() {
 
   return (
     <main>
+      <Seo doc={projectsDocument()} />
       <section className="border-b border-line dark:border-white/10">
         <div className="page py-14 md:py-20">
           <p className="eyebrow">Case studies</p>

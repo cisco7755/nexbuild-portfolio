@@ -1,5 +1,7 @@
 import { services } from '../utils/data'
 import CTASection from '../components/CTASection'
+import Seo from '../components/Seo'
+import { servicesDocument } from '../seo/documents'
 
 const stack = [
   {
@@ -23,6 +25,7 @@ const stack = [
 export default function Services() {
   return (
     <main>
+      <Seo doc={servicesDocument()} />
       <section className="border-b border-line dark:border-white/10">
         <div className="page py-14 md:py-20">
           <p className="eyebrow">Services</p>

@@ -12,6 +12,7 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import Insights from './pages/Insights'
 import InsightDetail from './pages/InsightDetail'
+import NotFound from './pages/NotFound'
 import WhatsAppButton from './components/WhatsAppButton'
 import PageTransition from './components/PageTransition'
 import ScrollProgress from './components/ScrollProgress'
@@ -48,7 +49,7 @@ export default function App() {
             <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
             <Route path="/insights" element={<PageTransition><Insights /></PageTransition>} />
             <Route path="/insights/:slug" element={<PageTransition><InsightDetail /></PageTransition>} />
-            <Route path="*" element={<PageTransition><Home /></PageTransition>} />
+            <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
           </Routes>
         </AnimatePresence>
       </div>
